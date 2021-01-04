@@ -2,8 +2,7 @@ package com.example.simpledictionary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.simpledictionary.ui.main.MainFragment
+import com.example.simpledictionary.presentation.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

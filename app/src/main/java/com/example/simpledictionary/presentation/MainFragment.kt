@@ -1,4 +1,4 @@
-package com.example.simpledictionary.ui.main
+package com.example.simpledictionary.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -12,12 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simpledictionary.databinding.MainFragmentBinding
 import com.example.simpledictionary.model.Resp
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.dsl.module
-
-
-val fragmentModule = module {
-    factory { MainFragment() }
-}
 
 class MainFragment : Fragment() {
 

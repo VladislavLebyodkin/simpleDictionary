@@ -1,4 +1,4 @@
-package com.example.simpledictionary.ui.main
+package com.example.simpledictionary.presentation
 
 import android.util.Log
 import android.view.LayoutInflater
