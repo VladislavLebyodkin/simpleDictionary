@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpledictionary.R
@@ -23,6 +25,7 @@ class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private lateinit var mainAdapter: MainAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var navController: NavController
 
     private val observer = Observer<List<Note>> {
         mainAdapter.setList(it)
@@ -35,12 +38,24 @@ class MainFragment : Fragment() {
 
         mainAdapter = MainAdapter()
         recyclerView = binding.recyclerView
-        recyclerView.adapter = mainAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.apply {
+            adapter = mainAdapter
+            layoutManager = LinearLayoutManager(this.context)
+        }
 
         mainViewModel.notes.observe(this.viewLifecycleOwner, observer)
 
+        binding.btnAddNote.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_addNoteFragment)
+        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = findNavController()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -1,19 +1,28 @@
 package com.example.simpledictionary
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.simpledictionary.notes.presentation.MainFragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.simpledictionary.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var navController: NavController
+    private lateinit var binding: MainActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
-                    .commitNow()
-        }
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                    .replace(R.id.container, AddNoteFragment.newInstance())
+//                    .commitNow()
+//        }
     }
+
 }

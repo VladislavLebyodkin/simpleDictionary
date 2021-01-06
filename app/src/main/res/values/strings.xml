@@ -2,4 +2,9 @@
     <string name="app_name">SimpleDictionary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_new_note">Добавить слово</string>
+    <string name="add">Добавить</string>
+    <string name="word">Слово</string>
+    <string name="translate">Перевод</string>
+    <string name="example">Пример</string>
 </resources>
