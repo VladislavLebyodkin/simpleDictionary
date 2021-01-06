@@ -5,7 +5,7 @@ import com.example.simpledictionary.network.Api
 
 class AddNoteRepositoryImpl(private val api: Api): AddNoteRepository {
 
-    override suspend fun createNote(noteAddDto: NoteAddDto) {
-        return api.createNote(noteAddDto)
+    override suspend fun createNote(name: String, translate: String, example: String) {
+        return api.createNote(name, translate, example)
     }
 }

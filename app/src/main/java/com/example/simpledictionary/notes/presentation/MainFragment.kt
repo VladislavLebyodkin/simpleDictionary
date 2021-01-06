@@ -17,10 +17,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private val mainViewModel: MainViewModel by viewModel()
     private lateinit var binding: MainFragmentBinding
     private lateinit var mainAdapter: MainAdapter

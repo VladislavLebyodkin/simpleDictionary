@@ -9,15 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.simpledictionary.R
+import com.example.simpledictionary.addNote.data.NoteAddDto
 import com.example.simpledictionary.databinding.AddNoteFragmentBinding
 import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AddNoteFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AddNoteFragment()
-    }
 
     private val addNoteViewModel: AddNoteViewModel by viewModel()
     private lateinit var binding: AddNoteFragmentBinding
@@ -28,8 +25,12 @@ class AddNoteFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         binding = AddNoteFragmentBinding.inflate(layoutInflater, container, false)
 
-
         binding.btnSubmit.setOnClickListener {
+            addNoteViewModel.createNote(
+                    binding.inputName.text.toString(),
+                    binding.inputTranslate.text.toString(),
+                    binding.inputExample.text.toString()
+            )
             navController.navigate(R.id.action_addNoteFragment_to_mainFragment)
         }
 
