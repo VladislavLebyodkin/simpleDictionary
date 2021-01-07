@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.simpledictionary.R
-import com.example.simpledictionary.addNote.data.NoteAddDto
 import com.example.simpledictionary.databinding.AddNoteFragmentBinding
-import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AddNoteFragment : Fragment() {

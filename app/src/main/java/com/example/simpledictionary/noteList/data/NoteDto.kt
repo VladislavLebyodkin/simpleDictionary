@@ -1,6 +1,6 @@
-package com.example.simpledictionary.notes.data
+package com.example.simpledictionary.noteList.data
 
-import com.example.simpledictionary.notes.domain.Note
+import com.example.simpledictionary.noteList.domain.Note
 import com.google.gson.annotations.SerializedName
 
 data class NotesDto(

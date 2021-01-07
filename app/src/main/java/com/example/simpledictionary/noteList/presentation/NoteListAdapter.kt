@@ -1,42 +1,57 @@
-package com.example.simpledictionary.notes.presentation
+package com.example.simpledictionary.noteList.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpledictionary.R
-import com.example.simpledictionary.notes.domain.Note
+import com.example.simpledictionary.noteList.domain.Note
 import kotlinx.android.synthetic.main.note_item.view.*
 
 
-class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class NoteListAdapter(
+    private val onNoteClicked: (Note) -> Unit
+): RecyclerView.Adapter<NoteListAdapter.MainViewHolder>() {
 
     private var notesList = emptyList<Note>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false)
-        return MainViewHolder(view)
+        return MainViewHolder(view) {
+            onNoteClicked(notesList[it])
+        }
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.nameNote.text = notesList[position].word
-        holder.translateNote.text = notesList[position].translate
-        holder.exampleNote.text = notesList[position].example
+        val note = notesList[position]
+        holder.nameNote.text = note.word
+        holder.translateNote.text = note.translate
+        holder.exampleNote.text = note.example
 
-//        if(notesList[position].example == null) {
-//            holder.exampleNote.visibility = View.GONE
-//        } else {
-//            holder.exampleNote.text = notesList[position].example
-//        }
+        holder.cardNote.setOnClickListener {
+            onNoteClicked(note)
+        }
     }
 
     override fun getItemCount() = notesList.size
 
-    class MainViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class MainViewHolder(
+        view: View,
+        onNoteClicked: (Int) -> Unit
+    ): RecyclerView.ViewHolder(view) {
+
+        val cardNote: CardView = view.card_note
         val nameNote: TextView = view.item_note_name
         val translateNote: TextView = view.item_note_translate
         val exampleNote: TextView = view.item_note_example
+
+        init {
+            itemView.setOnClickListener {
+                onNoteClicked(adapterPosition)
+            }
+        }
     }
 
     fun setList(list: List<Note>) {

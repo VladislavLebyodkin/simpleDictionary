@@ -1,7 +1,6 @@
 package com.example.simpledictionary.network
 
-import com.example.simpledictionary.addNote.data.NoteAddDto
-import com.example.simpledictionary.notes.data.NotesDto
+import com.example.simpledictionary.noteList.data.NotesDto
 import retrofit2.http.*
 
 
@@ -17,4 +16,7 @@ interface Api {
             @Field("translate") translate: String,
             @Field("example") example: String
     )
+
+    @DELETE("note/{id}")
+    suspend fun deleteNote(@Path("id") id: Long)
 }

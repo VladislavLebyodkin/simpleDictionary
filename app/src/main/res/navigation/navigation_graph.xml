@@ -7,12 +7,15 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.simpledictionary.notes.presentation.MainFragment"
+        android:name="com.example.simpledictionary.noteList.presentation.NoteListFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
@@ -24,5 +27,19 @@
             app:destination="@id/mainFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.simpledictionary.note.presentation.NoteFragment"
+        android:label="note_fragment"
+        tools:layout="@layout/note_fragment" >
+        <action
+            android:id="@+id/action_noteFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_graph" />
+        <argument
+            android:name="note"
+            app:argType="com.example.simpledictionary.noteList.domain.Note" />
     </fragment>
 </navigation>
