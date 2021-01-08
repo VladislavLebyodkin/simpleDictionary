@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.MainFragmentBinding
 import com.example.simpledictionary.noteList.domain.Note
-import com.example.simpledictionary.util.log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteListFragment : Fragment() {

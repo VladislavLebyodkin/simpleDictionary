@@ -30,7 +30,7 @@ class NoteFragment : Fragment() {
         setHasOptionsMenu(true)
         binding = NoteFragmentBinding.inflate(layoutInflater, container, false)
 
-        val note = arguments?.getSerializable("note") as Note
+        note = arguments?.getSerializable("note") as Note
 
         setFields(note)
 

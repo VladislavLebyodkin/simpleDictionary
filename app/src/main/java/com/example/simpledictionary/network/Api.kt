@@ -16,6 +16,14 @@ interface Api {
             @Field("translate") translate: String,
             @Field("example") example: String
     )
+    
+    @PUT("")
+    suspend fun updateNote(
+            @Field("id") id: Long,
+            @Field("word") name: String,
+            @Field("translate") translate: String,
+            @Field("example") example: String
+    )
 
     @DELETE("note/{id}")
     suspend fun deleteNote(@Path("id") id: Long)
