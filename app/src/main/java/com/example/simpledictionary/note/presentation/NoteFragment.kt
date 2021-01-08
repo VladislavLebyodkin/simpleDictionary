@@ -33,6 +33,15 @@ class NoteFragment : Fragment() {
         note = arguments?.getSerializable("note") as Note
 
         setFields(note)
+        binding.btnSubmitEdit.setOnClickListener {
+            noteViewModel.updateNote(Note(
+                    id = note.id,
+                    word = binding.inputNameEdit.text.toString(),
+                    translate = binding.inputTranslateEdit.text.toString(),
+                    example = binding.inputExampleEdit.text.toString(),
+            ))
+            navController.navigate(R.id.action_noteFragment_to_mainFragment)
+        }
 
         return binding.root
     }

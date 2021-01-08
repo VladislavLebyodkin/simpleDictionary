@@ -1,5 +1,6 @@
 package com.example.simpledictionary.network
 
+import com.example.simpledictionary.note.domain.NoteEditDto
 import com.example.simpledictionary.noteList.data.NotesDto
 import retrofit2.http.*
 
@@ -16,13 +17,11 @@ interface Api {
             @Field("translate") translate: String,
             @Field("example") example: String
     )
-    
-    @PUT("")
+
+    @PUT("note/{id}")
     suspend fun updateNote(
-            @Field("id") id: Long,
-            @Field("word") name: String,
-            @Field("translate") translate: String,
-            @Field("example") example: String
+        @Path("id") id: Long,
+        @Body noteEditDto: NoteEditDto
     )
 
     @DELETE("note/{id}")

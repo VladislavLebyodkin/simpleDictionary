@@ -13,9 +13,10 @@ class NoteViewModel(private val interactor: NoteInteractor) : ViewModel() {
     private val viewModelJob = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-
     fun updateNote(note: Note) {
-
+        scope.launch {
+            interactor.updateNote(note)
+        }
     }
 
     fun deleteNote(id: Long) {
@@ -23,5 +24,4 @@ class NoteViewModel(private val interactor: NoteInteractor) : ViewModel() {
             interactor.deleteNote(id = id)
         }
     }
-
 }

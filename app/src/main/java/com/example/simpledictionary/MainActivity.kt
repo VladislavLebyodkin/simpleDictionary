@@ -18,11 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                    .replace(R.id.container, AddNoteFragment.newInstance())
-//                    .commitNow()
-//        }
     }
-
 }
+
