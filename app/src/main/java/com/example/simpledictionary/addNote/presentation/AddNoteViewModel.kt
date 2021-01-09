@@ -1,20 +1,25 @@
 package com.example.simpledictionary.addNote.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.example.simpledictionary.R
 import com.example.simpledictionary.addNote.domain.AddNoteInteractor
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class AddNoteViewModel(private val interactor: AddNoteInteractor) : ViewModel() {
 
-    private val viewModelJob = SupervisorJob()
-    private val scope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    lateinit var navController: NavController
+
+//    fun createNote(name: String, translate: String, example: String) {
+//        scope.launch {
+//        }
+//    }
 
     fun createNote(name: String, translate: String, example: String) {
-        scope.launch {
+        viewModelScope.launch {
             interactor.createNote(name, translate, example)
+            navController.navigate(R.id.action_addNoteFragment_to_mainFragment)
         }
     }
 

@@ -1,6 +1,6 @@
 package com.example.simpledictionary.network
 
-import com.example.simpledictionary.note.domain.NoteEditDto
+import com.example.simpledictionary.note.data.NoteEditRequestDto
 import com.example.simpledictionary.noteList.data.NotesDto
 import retrofit2.http.*
 
@@ -21,7 +21,7 @@ interface Api {
     @PUT("note/{id}")
     suspend fun updateNote(
         @Path("id") id: Long,
-        @Body noteEditDto: NoteEditDto
+        @Body noteEditDto: NoteEditRequestDto
     )
 
     @DELETE("note/{id}")

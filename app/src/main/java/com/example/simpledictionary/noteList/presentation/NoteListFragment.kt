@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.MainFragmentBinding
 import com.example.simpledictionary.noteList.domain.Note
@@ -15,11 +13,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteListFragment : Fragment() {
 
-    private val mainViewModel: NoteListViewModel by viewModel()
+    private val viewModel: NoteListViewModel by viewModel()
     private lateinit var binding: MainFragmentBinding
     private lateinit var mainAdapter: NoteListAdapter
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var navController: NavController
 
     private val observer = Observer<List<Note>> {
         mainAdapter.setList(it)
@@ -31,20 +27,18 @@ class NoteListFragment : Fragment() {
         binding = MainFragmentBinding.inflate(layoutInflater, container, false)
 
         mainAdapter = NoteListAdapter { note ->
-            val bundle = Bundle()
-            bundle.putSerializable("note", note)
-            navController.navigate(R.id.action_mainFragment_to_noteFragment, bundle)
+            viewModel.onNoteClick(note)
         }
-        recyclerView = binding.recyclerView
-        recyclerView.apply {
+
+        binding.recyclerView.apply {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(this.context)
         }
 
-        mainViewModel.notes.observe(this.viewLifecycleOwner, observer)
+        viewModel.notes.observe(viewLifecycleOwner, observer)
 
         binding.btnAddNote.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_addNoteFragment)
+            viewModel.navController.navigate(R.id.action_mainFragment_to_addNoteFragment)
         }
 
         return binding.root
@@ -53,7 +47,7 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+        viewModel.navController = findNavController()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -63,7 +57,7 @@ class NoteListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.btn_shuffle -> {
-                mainAdapter.shuffle()
+                viewModel.onShuffleClick()
             }
         }
         return super.onOptionsItemSelected(item)

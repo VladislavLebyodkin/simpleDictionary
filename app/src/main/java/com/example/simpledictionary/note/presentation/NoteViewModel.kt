@@ -1,6 +1,10 @@
 package com.example.simpledictionary.note.presentation
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.example.simpledictionary.R
 import com.example.simpledictionary.note.domain.NoteInteractor
 import com.example.simpledictionary.noteList.domain.Note
 import kotlinx.coroutines.CoroutineScope
@@ -8,20 +12,30 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-class NoteViewModel(private val interactor: NoteInteractor) : ViewModel() {
+class NoteViewModel(
+        private val note: Note,
+        private val interactor: NoteInteractor
+        ) : ViewModel() {
 
-    private val viewModelJob = SupervisorJob()
-    private val scope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    val uiModel = MutableLiveData(note)
+    lateinit var navController: NavController
 
-    fun updateNote(note: Note) {
-        scope.launch {
-            interactor.updateNote(note)
+    fun updateNote(name: String, translate: String, example: String) {
+        viewModelScope.launch {
+            val newNote = note.copy(
+                    word = name,
+                    translate = translate,
+                    example = example
+            )
+            interactor.updateNote(newNote)
+            navController.navigate(R.id.action_noteFragment_to_mainFragment)
         }
     }
 
-    fun deleteNote(id: Long) {
-        scope.launch {
-            interactor.deleteNote(id = id)
+    fun deleteNote() {
+        viewModelScope.launch {
+            interactor.deleteNote(id = note.id)
+            navController.navigate(R.id.action_noteFragment_to_mainFragment)
         }
     }
 }
