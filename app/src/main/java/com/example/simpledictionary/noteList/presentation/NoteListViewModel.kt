@@ -11,17 +11,28 @@ import com.example.simpledictionary.R
 import com.example.simpledictionary.note.presentation.NoteFragment
 import com.example.simpledictionary.noteList.domain.Note
 import com.example.simpledictionary.noteList.domain.NoteListInteractor
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
 
     lateinit var navController: NavController
 
-    var notes = MutableLiveData<List<Note>>()
+    val notes = MutableLiveData<List<Note>>()
+    val showToast = MutableLiveData<String>()
+    val showLoading = MutableLiveData<Boolean>()
 
     init {
+        showLoading.value = true
         viewModelScope.launch {
-            notes.value = interactor.getAllWords()
+            try {
+                notes.value = interactor.getAllWords()
+            } catch (e: Exception) {
+                showToast.value = e.localizedMessage
+            } finally {
+                showLoading.value = false
+            }
         }
     }
 

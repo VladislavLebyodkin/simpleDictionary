@@ -2,6 +2,7 @@ package com.example.simpledictionary.noteList.presentation
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.MainFragmentBinding
 import com.example.simpledictionary.noteList.domain.Note
+import com.example.simpledictionary.util.log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteListFragment : Fragment() {
@@ -47,7 +49,23 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.showToast.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.showLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
         viewModel.navController = findNavController()
+    }
+
+    private fun showLoading(show: Boolean) {
+        if (show) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -62,5 +80,4 @@ class NoteListFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

@@ -51,6 +51,7 @@ class NoteFragment : Fragment() {
         viewModel.uiModel.observe(viewLifecycleOwner) { note ->
             setFields(note)
         }
+
         viewModel.navController = findNavController()
     }
 
