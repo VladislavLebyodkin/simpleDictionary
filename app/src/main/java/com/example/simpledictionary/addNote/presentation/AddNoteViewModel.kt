@@ -11,11 +11,6 @@ class AddNoteViewModel(private val interactor: AddNoteInteractor) : ViewModel() 
 
     lateinit var navController: NavController
 
-//    fun createNote(name: String, translate: String, example: String) {
-//        scope.launch {
-//        }
-//    }
-
     fun createNote(name: String, translate: String, example: String) {
         viewModelScope.launch {
             interactor.createNote(name, translate, example)

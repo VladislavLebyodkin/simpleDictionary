@@ -2,10 +2,26 @@ package com.example.simpledictionary.network
 
 import com.example.simpledictionary.note.data.NoteEditRequestDto
 import com.example.simpledictionary.noteList.data.NotesDto
+import com.example.simpledictionary.register.domain.UserInfo
 import retrofit2.http.*
 
 
 interface Api {
+
+    @FormUrlEncoded
+    @POST("security/register")
+    suspend fun register(
+            @Field("email") email: String,
+            @Field("pass") password: String,
+            @Field("confirm_pass") passwordConfirm: String
+    ): UserInfo
+
+    @FormUrlEncoded
+    @POST("security/login")
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("pass") password: String,
+    ): UserInfo
 
     @GET("note/list")
     suspend fun getAllWords() : NotesDto
