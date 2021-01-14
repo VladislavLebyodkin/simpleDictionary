@@ -25,14 +25,11 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
 
     init {
         showLoading.value = true
-        viewModelScope.launch {
-            try {
-                notes.value = interactor.getAllWords()
-            } catch (e: Exception) {
-                showToast.value = e.localizedMessage
-            } finally {
-                showLoading.value = false
-            }
+        if (interactor.isUserLogged()) {
+            getNotesList()
+        }
+        else {
+            navController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
     }
 
@@ -44,6 +41,18 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
 
     fun onShuffleClick() {
         notes.value = notes.value?.shuffled()
+    }
+
+    private fun getNotesList() {
+        viewModelScope.launch {
+            try {
+                notes.value = interactor.getAllWords()
+            } catch (e: Exception) {
+                showToast.value = e.localizedMessage
+            } finally {
+                showLoading.value = false
+            }
+        }
     }
 
 }

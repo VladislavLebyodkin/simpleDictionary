@@ -19,8 +19,9 @@ interface Api {
     @FormUrlEncoded
     @POST("security/login")
     suspend fun login(
-        @Field("email") email: String,
-        @Field("pass") password: String,
+            @Header("YT-AUTH-TOKEN") header: String?,
+            @Field("email") email: String,
+            @Field("pass") password: String,
     ): UserInfo
 
     @GET("note/list")

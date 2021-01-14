@@ -4,4 +4,6 @@ interface NoteListRepository {
 
     suspend fun getAllWords(): List<Note>
 
+    fun userIsLogged(): Boolean
+
 }

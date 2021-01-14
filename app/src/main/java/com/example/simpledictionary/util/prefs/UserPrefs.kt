@@ -17,7 +17,7 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
     }
 
     fun getAccessToken(): String? {
-        return defPrefs.getString(PREF_KEY_ACCESS_TOKEN, "")
+        return defPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
     }
 
     fun getUserLoginStatus(): Boolean {

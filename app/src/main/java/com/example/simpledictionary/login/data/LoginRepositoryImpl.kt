@@ -11,7 +11,7 @@ class LoginRepositoryImpl(
 ) : LoginRepository {
 
     override suspend fun login(email: String, password: String): UserInfo {
-        val response = api.login(email, password)
+        val response = api.login(null, email, password)
         prefs.setAccessToken(response.token)
         prefs.setUserLoginStatus(true)
         return response

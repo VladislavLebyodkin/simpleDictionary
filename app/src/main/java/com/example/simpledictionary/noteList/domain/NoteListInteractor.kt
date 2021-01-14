@@ -6,4 +6,8 @@ class NoteListInteractor(private val repository: NoteListRepository) {
         return repository.getAllWords()
     }
 
+    fun isUserLogged(): Boolean {
+        return repository.userIsLogged()
+    }
+
 }

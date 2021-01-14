@@ -5,6 +5,7 @@ import com.example.simpledictionary.addNote.addNoteModule
 import com.example.simpledictionary.login.loginModule
 import com.example.simpledictionary.network.networkModule
 import com.example.simpledictionary.note.noteModule
+import com.example.simpledictionary.noteList.mainModule
 import com.example.simpledictionary.register.registerModule
 import com.example.simpledictionary.util.prefs.defaultPrefsModule
 import com.example.simpledictionary.util.prefs.userPrefsModule

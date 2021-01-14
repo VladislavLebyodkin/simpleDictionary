@@ -21,8 +21,6 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
         binding = MainFragmentBinding.inflate(layoutInflater, container, false)
 
-
-
         mainAdapter = NoteListAdapter { note ->
             viewModel.onNoteClick(note)
         }
