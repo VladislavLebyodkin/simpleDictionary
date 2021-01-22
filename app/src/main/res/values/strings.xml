@@ -15,4 +15,5 @@
     <string name="login">Войти</string>
     <string name="have_no_acc">Еще нет аккаунта?</string>
     <string name="empty_word_list">У Вас еще нет слов для изучения</string>
+    <string name="fill_all_required_fields">Заполните необходимые поля</string>
 </resources>

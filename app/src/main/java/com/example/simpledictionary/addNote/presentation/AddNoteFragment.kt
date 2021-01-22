@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.AddNoteFragmentBinding
 import com.example.simpledictionary.util.isNotEmptyField
-import com.example.simpledictionary.util.log
 import com.example.simpledictionary.util.validate
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -31,6 +32,8 @@ class AddNoteFragment : Fragment() {
                         binding.inputTranslate.text.toString(),
                         binding.inputExample.text.toString()
                 )
+            } else {
+                Toast.makeText(context, getString(R.string.fill_all_required_fields), Toast.LENGTH_SHORT).show()
             }
         }
 
