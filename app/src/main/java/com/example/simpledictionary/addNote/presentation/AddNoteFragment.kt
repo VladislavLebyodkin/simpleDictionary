@@ -45,12 +45,12 @@ class AddNoteFragment : Fragment() {
 
         viewModel.navController = findNavController()
 
-        binding.inputName.validate("Введите слово") { field ->
+        binding.inputName.validate(getString(R.string.input_word)) { field ->
             isValidName = field.isNotEmptyField()
             field.isNotEmptyField()
         }
 
-        binding.inputTranslate.validate("Введите перевод") { field ->
+        binding.inputTranslate.validate(getString(R.string.input_translate)) { field ->
             isValidTranslate = field.isNotEmptyField()
             field.isNotEmptyField()
         }

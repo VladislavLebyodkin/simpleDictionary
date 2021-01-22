@@ -8,12 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.LoginFragmentBinding
+import com.example.simpledictionary.util.isNotEmptyField
+import com.example.simpledictionary.util.isValidEmail
+import com.example.simpledictionary.util.isValidPassword
+import com.example.simpledictionary.util.validate
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by viewModel()
     lateinit var binding: LoginFragmentBinding
+
+    private var isValidEmail = false
+    private var isValidPassword = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -35,6 +42,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.inputEmail.validate(getString(R.string.input_email)) { field ->
+            isValidEmail = field.isValidEmail()
+            field.isValidEmail()
+        }
+
+        binding.inputPassword.validate(getString(R.string.short_password)) { field ->
+            isValidPassword = field.isValidPassword()
+            field.isValidPassword()
+        }
 
         viewModel.navController = findNavController()
     }

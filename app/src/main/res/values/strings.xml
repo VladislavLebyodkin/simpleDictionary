@@ -16,4 +16,9 @@
     <string name="have_no_acc">Еще нет аккаунта?</string>
     <string name="empty_word_list">У Вас еще нет слов для изучения</string>
     <string name="fill_all_required_fields">Заполните необходимые поля</string>
+    <string name="input_word">Введите слово</string>
+    <string name="input_translate">Введите перевод</string>
+    <string name="input_email">Введите корректный email</string>
+    <string name="short_password">Слишком просто</string>
+    <string name="different_password">Пароли не совпадают</string>
 </resources>

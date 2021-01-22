@@ -64,12 +64,12 @@ class NoteFragment : Fragment() {
 
         viewModel.navController = findNavController()
 
-        binding.inputNameEdit.validate("Введите слово") { field ->
+        binding.inputNameEdit.validate(getString(R.string.input_word)) { field ->
             isValidNameEdit = field.isNotEmptyField()
             field.isNotEmptyField()
         }
 
-        binding.inputTranslateEdit.validate("Введите перевод") { field ->
+        binding.inputTranslateEdit.validate(getString(R.string.input_translate)) { field ->
             isValidTranslateEdit = field.isNotEmptyField()
             field.isNotEmptyField()
         }

@@ -1,6 +1,7 @@
 package com.example.simpledictionary.util
 
 import android.util.Log
+import android.util.Patterns
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 
@@ -18,3 +19,12 @@ fun EditText.validate(message: String, validator: (String) -> Boolean) {
 
 fun String.isNotEmptyField(): Boolean
         = this.isNotEmpty()
+
+fun String.isValidEmail(): Boolean
+        = this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+fun String.isValidPassword(): Boolean
+        = this.length >= 3
+
+fun String.same(compare: String): Boolean
+        = this == compare
