@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.MainFragmentBinding
+import com.example.simpledictionary.util.log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteListFragment : Fragment() {
@@ -42,6 +43,11 @@ class NoteListFragment : Fragment() {
 
         viewModel.notes.observe(viewLifecycleOwner) { list->
             mainAdapter.setList(list)
+            if (mainAdapter.itemCount == 0) {
+                binding.tvListEmpty.visibility = View.VISIBLE
+            } else {
+                binding.tvListEmpty.visibility = View.GONE
+            }
         }
 
         viewModel.showToast.observe(viewLifecycleOwner) { message ->

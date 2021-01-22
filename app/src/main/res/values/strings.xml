@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SimpleDictionary</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_note">Добавить слово</string>
     <string name="add">Добавить</string>
@@ -15,4 +14,5 @@
     <string name="already_register">Уже есть аккаунт? Войдите</string>
     <string name="login">Войти</string>
     <string name="have_no_acc">Еще нет аккаунта?</string>
+    <string name="empty_word_list">У Вас еще нет слов для изучения</string>
 </resources>

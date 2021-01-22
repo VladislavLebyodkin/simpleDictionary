@@ -58,8 +58,4 @@ class NoteListAdapter(
         notesList = list
         notifyDataSetChanged()
     }
-
-    fun shuffle() {
-        setList(notesList.shuffled())
-    }
 }

@@ -8,7 +8,6 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
     companion object {
         const val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
         const val PREF_KEY_USER_LOGIN_STATUS = "PREF_KEY_USER_LOGIN_STATUS"
-        const val PREF_FILE_NAME = "PREF_FILE_NAME"
         const val TOKEN_PREFIX = "YourTar "
     }
 

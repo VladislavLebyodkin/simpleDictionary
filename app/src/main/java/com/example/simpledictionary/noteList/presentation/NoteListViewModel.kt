@@ -1,18 +1,14 @@
 package com.example.simpledictionary.noteList.presentation
 
 import android.os.Bundle
-import androidx.compose.runtime.emit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.note.presentation.NoteFragment
 import com.example.simpledictionary.noteList.domain.Note
 import com.example.simpledictionary.noteList.domain.NoteListInteractor
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
@@ -22,10 +18,11 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     val notes = MutableLiveData<List<Note>>()
     val showToast = MutableLiveData<String>()
     val showLoading = MutableLiveData<Boolean>()
+    val listIsEmpty = MutableLiveData<Boolean>()
 
     init {
         showLoading.value = true
-        if (interactor.isUserLogged()) {
+        if (interactor.isUserLoggedIn()) {
             getNotesList()
         }
         else {

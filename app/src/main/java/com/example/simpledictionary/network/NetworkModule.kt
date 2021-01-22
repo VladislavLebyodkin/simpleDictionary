@@ -40,17 +40,17 @@ fun provideOkHttpClient(prefs: UserPrefs): OkHttpClient {
     }
 
     val logInterceptor = HttpLoggingInterceptor().apply {
-        this.level = HttpLoggingInterceptor.Level.HEADERS
+        this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val client = OkHttpClient.Builder()
-    client.addInterceptor(logInterceptor)
+    val okHttpClient = OkHttpClient.Builder()
+    okHttpClient.addInterceptor(logInterceptor)
 
     if(prefs.getAccessToken() != null) {
-        client.addInterceptor(authInterceptor)
+        okHttpClient.addInterceptor(authInterceptor)
     }
 
-    return client.build()
+    return okHttpClient.build()
 }
 
 fun provideApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
