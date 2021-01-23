@@ -1,7 +1,7 @@
 package com.example.simpledictionary.network
 
 import com.example.simpledictionary.addNote.data.AddNoteResponse
-import com.example.simpledictionary.note.data.EditNoteResponse
+import com.example.simpledictionary.note.data.EditDeleteNoteResponse
 import com.example.simpledictionary.note.data.NoteEditRequestDto
 import com.example.simpledictionary.noteList.data.NotesDto
 import com.example.simpledictionary.register.domain.UserInfo
@@ -41,8 +41,8 @@ interface Api {
     suspend fun updateNote(
         @Path("id") id: Long,
         @Body noteEditDto: NoteEditRequestDto
-    ): EditNoteResponse
+    ): EditDeleteNoteResponse
 
     @DELETE("note/{id}")
-    suspend fun deleteNote(@Path("id") id: Long): EditNoteResponse
+    suspend fun deleteNote(@Path("id") id: Long): EditDeleteNoteResponse
 }
