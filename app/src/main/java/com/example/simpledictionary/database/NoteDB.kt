@@ -7,7 +7,7 @@ import com.example.simpledictionary.noteList.domain.Note
 
 @Entity(tableName = "notes")
 data class NoteDB (
-        @PrimaryKey(autoGenerate = true) val id: Long,
+        @PrimaryKey(autoGenerate = true) var id: Long,
         @ColumnInfo(name = "word") val word: String,
         @ColumnInfo(name = "translate") val translate: String,
         @ColumnInfo(name = "example") val example: String? = "",

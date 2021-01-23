@@ -5,7 +5,7 @@ import com.example.simpledictionary.noteList.domain.Note
 
 interface NoteRepository {
 
-    suspend fun deleteNote(id: Long)
+    suspend fun deleteNote(id: Long): EditNoteResponse
 
     suspend fun updateNote(note: Note): EditNoteResponse
 

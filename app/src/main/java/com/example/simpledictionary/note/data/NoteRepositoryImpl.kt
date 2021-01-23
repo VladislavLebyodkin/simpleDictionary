@@ -11,14 +11,20 @@ class NoteRepositoryImpl(
     private val notesDB: NotesDAO
 ): NoteRepository {
 
-    override suspend fun deleteNote(id: Long) {
-        return api.deleteNote(id = id)
+    override suspend fun deleteNote(id: Long): EditNoteResponse {
+        val deletedNote = api.deleteNote(id = id)
+        log(notesDB.getNotesList())
+
+        notesDB.delete(deletedNote.editedNote.copy(
+                id = id
+        ))
+        log(notesDB.getNotesList())
+        return deletedNote
     }
 
     override suspend fun updateNote(note: Note): EditNoteResponse {
         val editedNote = api.updateNote(note.id, note.toEditRequestDto())
         notesDB.insert(editedNote.editedNote)
-        log(notesDB.getNotesList())
         return editedNote
     }
 

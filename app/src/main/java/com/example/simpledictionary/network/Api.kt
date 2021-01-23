@@ -44,5 +44,5 @@ interface Api {
     ): EditNoteResponse
 
     @DELETE("note/{id}")
-    suspend fun deleteNote(@Path("id") id: Long)
+    suspend fun deleteNote(@Path("id") id: Long): EditNoteResponse
 }

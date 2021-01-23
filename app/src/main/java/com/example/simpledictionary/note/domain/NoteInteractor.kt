@@ -9,7 +9,7 @@ class NoteInteractor(private val repository: NoteRepository) {
         return repository.updateNote(note)
     }
 
-    suspend fun deleteNote(id: Long) {
+    suspend fun deleteNote(id: Long): EditNoteResponse {
         return repository.deleteNote(id)
     }
 

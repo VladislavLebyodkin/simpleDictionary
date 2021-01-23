@@ -21,7 +21,7 @@ class NoteListRepositoryImpl(
     }
 
     override suspend fun getCachedNotes(): List<Note> {
-        return notesDB.getNotesList()
+        return notesDB.getNotesList().asReversed()
     }
 
     override suspend fun getNotesList(): List<Note> {
