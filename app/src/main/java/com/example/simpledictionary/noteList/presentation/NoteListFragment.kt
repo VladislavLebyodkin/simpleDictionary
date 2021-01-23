@@ -51,20 +51,8 @@ class NoteListFragment : Fragment() {
             }
         }
 
-        viewModel.showToast.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        }
-
         viewModel.showError.observe(viewLifecycleOwner) {
             Toast.makeText(context, getString(R.string.smth_wrong), Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun showLoading(show: Boolean) {
-        if (show) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
         }
     }
 

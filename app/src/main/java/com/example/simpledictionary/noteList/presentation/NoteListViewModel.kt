@@ -9,6 +9,7 @@ import com.example.simpledictionary.R
 import com.example.simpledictionary.note.presentation.NoteFragment
 import com.example.simpledictionary.noteList.domain.Note
 import com.example.simpledictionary.noteList.domain.NoteListInteractor
+import com.example.simpledictionary.util.SingleLiveEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -17,8 +18,7 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     lateinit var navController: NavController
 
     val notes = MutableLiveData<List<Note>>()
-    val showToast = MutableLiveData<String>()
-    val showError = MutableLiveData<Boolean>()
+    val showError = SingleLiveEvent<Boolean>()
 
     init {
         if (interactor.isUserLoggedIn()) {

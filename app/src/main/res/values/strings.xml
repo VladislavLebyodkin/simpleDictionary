@@ -22,4 +22,5 @@
     <string name="short_password">Слишком просто</string>
     <string name="different_password">Пароли не совпадают</string>
     <string name="smth_wrong">Упс, что-то пошло не так</string>
+    <string name="Upssss">Ups</string>
 </resources>

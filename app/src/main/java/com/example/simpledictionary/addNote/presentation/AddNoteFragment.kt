@@ -54,5 +54,9 @@ class AddNoteFragment : Fragment() {
             isValidTranslate = field.isNotEmptyField()
             field.isNotEmptyField()
         }
+
+        viewModel.showError.observe(viewLifecycleOwner) {
+            Toast.makeText(context, getString(R.string.smth_wrong), Toast.LENGTH_SHORT).show()
+        }
     }
 }

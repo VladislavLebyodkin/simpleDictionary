@@ -12,9 +12,7 @@ class AddNoteRepositoryImpl(
 
     override suspend fun createNote(name: String, translate: String, example: String): AddNoteResponse {
         val newNote = api.createNote(name, translate, example)
-        log(notesDB.getNotesList())
         notesDB.insert(newNote.newNote)
-        log(notesDB.getNotesList())
         return newNote
     }
 }
