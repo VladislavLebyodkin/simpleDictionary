@@ -11,9 +11,7 @@ import kotlinx.coroutines.launch
 class AddNoteViewModel(private val interactor: AddNoteInteractor) : ViewModel() {
 
     lateinit var navController: NavController
-    val showError = SingleLiveEvent<Boolean>()
-
-
+    val showError = SingleLiveEvent<Void>()
 
     fun createNote(name: String, translate: String, example: String) {
         viewModelScope.launch {
@@ -21,7 +19,7 @@ class AddNoteViewModel(private val interactor: AddNoteInteractor) : ViewModel() 
                 interactor.createNote(name, translate, example)
                 navController.navigate(R.id.action_addNoteFragment_to_mainFragment)
             } catch (e: Exception) {
-                showError.value = true
+                showError.call()
             }
         }
     }

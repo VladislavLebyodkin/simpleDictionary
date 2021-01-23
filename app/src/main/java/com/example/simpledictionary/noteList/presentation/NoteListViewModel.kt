@@ -18,7 +18,7 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     lateinit var navController: NavController
 
     val notes = MutableLiveData<List<Note>>()
-    val showError = SingleLiveEvent<Boolean>()
+    val showError = SingleLiveEvent<Void>()
 
     init {
         if (interactor.isUserLoggedIn()) {
@@ -56,7 +56,7 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
             try {
                 notes.value = interactor.getNotesList()
             } catch (e: Exception) {
-                showError.value = true
+                showError.call()
             }
         }
     }
