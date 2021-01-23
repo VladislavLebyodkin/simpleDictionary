@@ -7,15 +7,12 @@ import androidx.navigation.NavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.note.domain.NoteInteractor
 import com.example.simpledictionary.noteList.domain.Note
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class NoteViewModel(
         private val note: Note,
         private val interactor: NoteInteractor
-        ) : ViewModel() {
+) : ViewModel() {
 
     val uiModel = MutableLiveData(note)
     lateinit var navController: NavController

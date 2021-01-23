@@ -1,5 +1,6 @@
 package com.example.simpledictionary.network
 
+import com.example.simpledictionary.addNote.data.AddNoteResponse
 import com.example.simpledictionary.note.data.NoteEditRequestDto
 import com.example.simpledictionary.noteList.data.NotesDto
 import com.example.simpledictionary.register.domain.UserInfo
@@ -33,7 +34,7 @@ interface Api {
             @Field("word") name: String,
             @Field("translate") translate: String,
             @Field("example") example: String
-    )
+    ): AddNoteResponse
 
     @PUT("note/{id}")
     suspend fun updateNote(

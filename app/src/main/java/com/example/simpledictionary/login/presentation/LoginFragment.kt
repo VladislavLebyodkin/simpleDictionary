@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.LoginFragmentBinding
-import com.example.simpledictionary.util.isNotEmptyField
 import com.example.simpledictionary.util.isValidEmail
 import com.example.simpledictionary.util.isValidPassword
 import com.example.simpledictionary.util.validate

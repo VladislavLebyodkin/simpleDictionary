@@ -2,6 +2,8 @@ package com.example.simpledictionary
 
 import android.app.Application
 import com.example.simpledictionary.addNote.addNoteModule
+import com.example.simpledictionary.database.NotesDatabase
+import com.example.simpledictionary.database.roomModule
 import com.example.simpledictionary.login.loginModule
 import com.example.simpledictionary.network.networkModule
 import com.example.simpledictionary.note.noteModule
@@ -28,7 +30,8 @@ class App: Application() {
                 loginModule,
                 mainModule,
                 addNoteModule,
-                noteModule))
+                noteModule,
+                roomModule))
         }
     }
 

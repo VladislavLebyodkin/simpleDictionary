@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.MainFragmentBinding
-import com.example.simpledictionary.util.log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteListFragment : Fragment() {
@@ -19,6 +18,8 @@ class NoteListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+        viewModel.navController = findNavController()
+
         setHasOptionsMenu(true)
         binding = MainFragmentBinding.inflate(layoutInflater, container, false)
 
@@ -54,11 +55,9 @@ class NoteListFragment : Fragment() {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.showLoading.observe(viewLifecycleOwner) {
-            showLoading(it)
+        viewModel.showError.observe(viewLifecycleOwner) {
+            Toast.makeText(context, getString(R.string.smth_wrong), Toast.LENGTH_SHORT).show()
         }
-
-        viewModel.navController = findNavController()
     }
 
     private fun showLoading(show: Boolean) {

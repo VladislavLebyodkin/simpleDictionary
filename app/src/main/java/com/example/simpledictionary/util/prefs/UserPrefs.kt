@@ -1,7 +1,6 @@
 package com.example.simpledictionary.util.prefs
 
 import android.content.SharedPreferences
-import org.koin.dsl.module
 
 class UserPrefs(private val defPrefs: SharedPreferences) {
 
@@ -9,6 +8,10 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
         const val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
         const val PREF_KEY_USER_LOGIN_STATUS = "PREF_KEY_USER_LOGIN_STATUS"
         const val TOKEN_PREFIX = "YourTar "
+    }
+
+    fun clear() {
+        defPrefs.edit().clear().apply()
     }
 
     fun setAccessToken(token: String) {

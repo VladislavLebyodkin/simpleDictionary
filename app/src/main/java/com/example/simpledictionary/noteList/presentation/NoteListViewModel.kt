@@ -9,6 +9,7 @@ import com.example.simpledictionary.R
 import com.example.simpledictionary.note.presentation.NoteFragment
 import com.example.simpledictionary.noteList.domain.Note
 import com.example.simpledictionary.noteList.domain.NoteListInteractor
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
@@ -17,16 +18,20 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
 
     val notes = MutableLiveData<List<Note>>()
     val showToast = MutableLiveData<String>()
-    val showLoading = MutableLiveData<Boolean>()
-    val listIsEmpty = MutableLiveData<Boolean>()
+    val showError = MutableLiveData<Boolean>()
 
     init {
-        showLoading.value = true
         if (interactor.isUserLoggedIn()) {
+            getCachedNotes()
             getNotesList()
         }
         else {
-            navController.navigate(R.id.action_mainFragment_to_loginFragment)
+//            navController.navigate(R.id.action_mainFragment_to_loginFragment)
+
+            viewModelScope.launch {
+                delay(1)
+                navController.navigate(R.id.action_mainFragment_to_loginFragment)
+            }
         }
     }
 
@@ -40,16 +45,19 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
         notes.value = notes.value?.shuffled()
     }
 
-    private fun getNotesList() {
+    private fun getCachedNotes() {
         viewModelScope.launch {
-            try {
-                notes.value = interactor.getAllWords()
-            } catch (e: Exception) {
-                showToast.value = e.localizedMessage
-            } finally {
-                showLoading.value = false
-            }
+            notes.value = interactor.getCachedNotesList()
         }
     }
 
+    private fun getNotesList() {
+        viewModelScope.launch {
+            try {
+                notes.value = interactor.getNotesList()
+            } catch (e: Exception) {
+                showError.value = true
+            }
+        }
+    }
 }

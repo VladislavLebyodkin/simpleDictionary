@@ -12,6 +12,6 @@ val noteModule = module {
 
     viewModel { (note: Note) -> NoteViewModel(note, get()) }
     factory { NoteInteractor(get()) }
-    single<NoteRepository> { NoteRepositoryImpl(get()) }
+    single<NoteRepository> { NoteRepositoryImpl(get(), get()) }
 
 }

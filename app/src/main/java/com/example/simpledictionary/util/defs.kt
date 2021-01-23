@@ -25,6 +25,3 @@ fun String.isValidEmail(): Boolean
 
 fun String.isValidPassword(): Boolean
         = this.length >= 3
-
-fun String.same(compare: String): Boolean
-        = this == compare

@@ -3,7 +3,6 @@ package com.example.simpledictionary.login.data
 import com.example.simpledictionary.login.domain.LoginRepository
 import com.example.simpledictionary.network.Api
 import com.example.simpledictionary.register.domain.UserInfo
-import com.example.simpledictionary.util.log
 import com.example.simpledictionary.util.prefs.UserPrefs
 
 class LoginRepositoryImpl(
