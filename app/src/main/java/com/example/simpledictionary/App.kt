@@ -2,12 +2,11 @@ package com.example.simpledictionary
 
 import android.app.Application
 import com.example.simpledictionary.addNote.addNoteModule
-import com.example.simpledictionary.database.NotesDatabase
 import com.example.simpledictionary.database.roomModule
 import com.example.simpledictionary.login.loginModule
 import com.example.simpledictionary.network.networkModule
 import com.example.simpledictionary.note.noteModule
-import com.example.simpledictionary.noteList.mainModule
+import com.example.simpledictionary.noteList.noteListModule
 import com.example.simpledictionary.register.registerModule
 import com.example.simpledictionary.util.prefs.defaultPrefsModule
 import com.example.simpledictionary.util.prefs.userPrefsModule
@@ -28,7 +27,7 @@ class App: Application() {
                 userPrefsModule,
                 registerModule,
                 loginModule,
-                mainModule,
+                noteListModule,
                 addNoteModule,
                 noteModule,
                 roomModule))

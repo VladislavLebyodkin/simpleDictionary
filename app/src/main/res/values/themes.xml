@@ -12,5 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+<!--        <item name="android:background">@drawable/ic_launcher_foreground</item>-->
     </style>
+
+<!--    <style name="Theme.NotesApp.Transparent" parent="Theme.NotesApp">-->
+<!--        <item name="android:background">#FFFFFF</item>-->
+<!--    </style>-->
 </resources>

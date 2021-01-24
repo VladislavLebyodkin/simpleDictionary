@@ -13,8 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 val networkModule = module {
-    factory { provideOkHttpClient(get()) }
-    factory { provideApi(get()) }
+    single { provideOkHttpClient(get()) }
+    single { provideApi(get()) }
     single { provideRetrofit(get()) }
 }
 
@@ -53,4 +53,4 @@ fun provideOkHttpClient(prefs: UserPrefs): OkHttpClient {
     return okHttpClient.build()
 }
 
-fun provideApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
+fun provideApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)

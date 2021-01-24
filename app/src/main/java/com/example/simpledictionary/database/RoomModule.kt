@@ -7,16 +7,9 @@ import org.koin.dsl.module
 
 val roomModule = module {
 
-    fun provideDatabase(application: Application): NotesDatabase {
-        return Room.databaseBuilder(application, NotesDatabase::class.java, "countries")
-            .fallbackToDestructiveMigration()
-            .build()
+    single {
+        Room.databaseBuilder(androidApplication(), NotesDatabase::class.java, "NotesDatabase")
+                .build()
     }
 
-    fun provideNotesDao(database: NotesDatabase): NotesDAO {
-        return  database.notesDAO
-    }
-
-    single { provideDatabase(androidApplication()) }
-    factory { provideNotesDao(get()) }
 }

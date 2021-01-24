@@ -18,7 +18,6 @@ class NoteListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        viewModel.navController = findNavController()
 
         setHasOptionsMenu(true)
         binding = MainFragmentBinding.inflate(layoutInflater, container, false)
@@ -41,7 +40,9 @@ class NoteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.navController = findNavController()
+        viewModel.onViewCreated()
+        
         viewModel.notes.observe(viewLifecycleOwner) { list->
             mainAdapter.setList(list)
             if (mainAdapter.itemCount == 0) {

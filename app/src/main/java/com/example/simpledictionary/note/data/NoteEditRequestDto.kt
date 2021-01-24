@@ -11,8 +11,8 @@ data class NoteEditRequestDto (
 
 fun Note.toEditRequestDto(): NoteEditRequestDto {
     return NoteEditRequestDto(
-            word = this.word,
-            translate = this.translate,
-            example = this.example
+            word = word,
+            translate = translate,
+            example = example
     )
 }

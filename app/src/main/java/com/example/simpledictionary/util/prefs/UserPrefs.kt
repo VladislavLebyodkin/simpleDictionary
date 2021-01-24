@@ -6,7 +6,6 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
 
     companion object {
         const val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
-        const val PREF_KEY_USER_LOGIN_STATUS = "PREF_KEY_USER_LOGIN_STATUS"
         const val TOKEN_PREFIX = "YourTar "
     }
 
@@ -22,15 +21,5 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
         return defPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
     }
 
-    fun getUserLoginStatus(): Boolean {
-        return defPrefs.getBoolean(PREF_KEY_USER_LOGIN_STATUS, false)
-    }
-
-    fun setUserLoginStatus(status: Boolean) {
-        defPrefs
-            .edit()
-            .putBoolean(PREF_KEY_USER_LOGIN_STATUS, status)
-            .apply()
-    }
 
 }

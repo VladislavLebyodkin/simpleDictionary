@@ -4,6 +4,6 @@ import com.example.simpledictionary.addNote.data.AddNoteResponse
 
 interface AddNoteRepository {
 
-    suspend fun createNote(name: String, translate: String, example: String): AddNoteResponse
+    suspend fun createNote(name: String, translate: String, example: String)
 
 }
