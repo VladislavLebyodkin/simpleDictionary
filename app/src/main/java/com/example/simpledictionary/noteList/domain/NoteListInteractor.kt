@@ -3,7 +3,7 @@ package com.example.simpledictionary.noteList.domain
 class NoteListInteractor(private val repository: NoteListRepository) {
 
     suspend fun getNotesList(): List<Note> {
-        return repository.getNotesList()
+        return repository.loadNotesList()
     }
 
     suspend fun getCachedNotesList(): List<Note> {
@@ -12,10 +12,6 @@ class NoteListInteractor(private val repository: NoteListRepository) {
 
     fun isUserLoggedIn(): Boolean {
         return repository.userIsLogged()
-    }
-
-    fun clear() {
-        return repository.clear()
     }
 
 }

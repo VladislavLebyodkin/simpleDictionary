@@ -1,13 +1,13 @@
 package com.example.simpledictionary.database
 
-import android.app.Application
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.simpledictionary.noteList.data.local.NoteEntity
+import com.example.simpledictionary.noteList.data.local.NotesDao
 
-@Database(entities = [NoteDB::class], version = 1)
+@Database(entities = [NoteEntity::class], version = 1)
 abstract class NotesDatabase : RoomDatabase() {
 
-    abstract val notesDAO: NotesDAO
+    abstract val notesDao: NotesDao
 
 }

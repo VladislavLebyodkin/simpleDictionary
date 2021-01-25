@@ -10,27 +10,12 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
         const val TOKEN_PREFIX = "YourTar "
     }
 
-    fun clear() {
-        defPrefs.edit().clear().apply()
-    }
-
     fun setAccessToken(token: String) {
         defPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, TOKEN_PREFIX + token).apply()
     }
 
     fun getAccessToken(): String? {
         return defPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
-    }
-
-    fun getUserLoginStatus(): Boolean {
-        return defPrefs.getBoolean(PREF_KEY_USER_LOGIN_STATUS, false)
-    }
-
-    fun setUserLoginStatus(status: Boolean) {
-        defPrefs
-            .edit()
-            .putBoolean(PREF_KEY_USER_LOGIN_STATUS, status)
-            .apply()
     }
 
 }

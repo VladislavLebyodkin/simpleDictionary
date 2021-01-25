@@ -1,18 +1,17 @@
 package com.example.simpledictionary.addNote.data
 
 import com.example.simpledictionary.addNote.domain.AddNoteRepository
-import com.example.simpledictionary.database.NotesDAO
-import com.example.simpledictionary.network.Api
-import com.example.simpledictionary.util.log
+import com.example.simpledictionary.noteList.data.local.NotesDao
+import com.example.simpledictionary.noteList.data.remote.NotesApi
 
 class AddNoteRepositoryImpl(
-    private val api: Api,
-    private val notesDB: NotesDAO
+        private val notesApi: NotesApi,
+        private val notesDao: NotesDao
 ): AddNoteRepository {
 
-    override suspend fun createNote(name: String, translate: String, example: String): AddNoteResponse {
-        val newNote = api.createNote(name, translate, example)
-        notesDB.insert(newNote.newNote)
+    override suspend fun createNote(name: String, translate: String, example: String): AddNoteResponseDto {
+        val newNote = notesApi.createNote(name, translate, example)
+        notesDao.insert(newNote.newNote)
         return newNote
     }
 }

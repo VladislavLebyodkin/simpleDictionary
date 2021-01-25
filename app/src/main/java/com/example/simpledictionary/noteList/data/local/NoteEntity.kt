@@ -1,4 +1,4 @@
-package com.example.simpledictionary.database
+package com.example.simpledictionary.noteList.data.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.example.simpledictionary.noteList.domain.Note
 
 @Entity(tableName = "notes")
-data class NoteDB (
+data class NoteEntity (
         @PrimaryKey(autoGenerate = true) var id: Long,
         @ColumnInfo(name = "word") val word: String,
         @ColumnInfo(name = "translate") val translate: String,

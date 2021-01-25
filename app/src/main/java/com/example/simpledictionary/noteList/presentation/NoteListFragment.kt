@@ -3,6 +3,7 @@ package com.example.simpledictionary.noteList.presentation
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,14 +42,12 @@ class NoteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.onViewCreated()
 
         viewModel.notes.observe(viewLifecycleOwner) { list->
             mainAdapter.setList(list)
-            if (mainAdapter.itemCount == 0) {
-                binding.tvListEmpty.visibility = View.VISIBLE
-            } else {
-                binding.tvListEmpty.visibility = View.GONE
-            }
+
+            binding.tvListEmpty.isVisible = mainAdapter.itemCount == 0
         }
 
         viewModel.showError.observe(viewLifecycleOwner) {
