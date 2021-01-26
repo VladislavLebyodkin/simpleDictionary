@@ -1,6 +1,6 @@
 package com.example.simpledictionary.noteList.data.remote
 
-import com.example.simpledictionary.noteList.data.local.NoteEntity
+import com.example.simpledictionary.noteList.data.local.NoteDto
 import com.example.simpledictionary.noteList.domain.Note
 import com.google.gson.annotations.SerializedName
 
@@ -30,23 +30,23 @@ fun NotesDto.toDomain(): List<Note> {
     }
 }
 
-fun NotesDto.toEntity(): List<NoteEntity> {
+fun NotesDto.toEntity(): List<NoteDto> {
     return notes.map {
-        NoteEntity(
-            id = it.id,
-            word = it.word,
-            translate = it.translate,
-            example = it.example,
-            createdAt = it.createdAt,
-            updatedAt = it.updatedAt,
-            boxNumber = it.boxNumber,
-            lastTransition = it.lastTransition
+        NoteDto(
+                id = it.id,
+                word = it.word,
+                translate = it.translate,
+                example = it.example,
+                createdAt = it.createdAt,
+                updatedAt = it.updatedAt,
+                boxNumber = it.boxNumber,
+                lastTransition = it.lastTransition
         )
     }
 }
 
-fun NoteDto.toEntity(): NoteEntity {
-    return NoteEntity(
+fun NoteDto.toEntity(): NoteDto {
+    return NoteDto(
             id = id,
             word = word,
             translate = translate,

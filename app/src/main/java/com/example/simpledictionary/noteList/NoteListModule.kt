@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val noteListModule = module {
 
-    single { get<NotesDatabase>().notesDAO }
+    single { get<NotesDatabase>().notesDao }
 
     viewModel { NoteListViewModel(get()) }
     factory { NoteListInteractor(get()) }

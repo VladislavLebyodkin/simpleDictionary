@@ -41,14 +41,9 @@ class NoteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-<<<<<<< HEAD
         viewModel.navController = findNavController()
         viewModel.onViewCreated()
-        
-=======
-        viewModel.onViewCreated()
 
->>>>>>> dev
         viewModel.notes.observe(viewLifecycleOwner) { list->
             mainAdapter.setList(list)
 

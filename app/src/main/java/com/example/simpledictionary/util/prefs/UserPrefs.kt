@@ -17,8 +17,4 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
         return defPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 }

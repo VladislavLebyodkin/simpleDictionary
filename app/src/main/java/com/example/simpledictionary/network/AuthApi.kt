@@ -21,9 +21,5 @@ interface AuthApi {
             @Field("email") email: String,
             @Field("pass") password: String,
     ): UserInfo
-<<<<<<< HEAD
-=======
 
-
->>>>>>> dev
 }
