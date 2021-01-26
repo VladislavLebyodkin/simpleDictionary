@@ -8,6 +8,10 @@ import com.example.simpledictionary.noteList.data.local.NotesDao
 @Database(entities = [NoteEntity::class], version = 1)
 abstract class NotesDatabase : RoomDatabase() {
 
+<<<<<<< HEAD
     abstract val notesDAO: NotesDao
+=======
+    abstract val notesDao: NotesDao
+>>>>>>> dev
 
 }

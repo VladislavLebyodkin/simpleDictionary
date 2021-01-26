@@ -1,6 +1,7 @@
 package com.example.simpledictionary.network
 
 import com.example.simpledictionary.BuildConfig
+import com.example.simpledictionary.noteList.data.remote.NotesApi
 import com.example.simpledictionary.util.prefs.UserPrefs
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -13,8 +14,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 val networkModule = module {
+<<<<<<< HEAD
     single { provideOkHttpClient(get()) }
     single { provideApi(get()) }
+=======
+    factory { provideOkHttpClient(get()) }
+    factory { provideAuthApi(get()) }
+    factory { provideNotesApi(get()) }
+>>>>>>> dev
     single { provideRetrofit(get()) }
 }
 
@@ -53,4 +60,9 @@ fun provideOkHttpClient(prefs: UserPrefs): OkHttpClient {
     return okHttpClient.build()
 }
 
+<<<<<<< HEAD
 fun provideApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+=======
+fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+fun provideNotesApi(retrofit: Retrofit): NotesApi = retrofit.create(NotesApi::class.java)
+>>>>>>> dev

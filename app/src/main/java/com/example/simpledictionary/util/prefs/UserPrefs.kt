@@ -9,10 +9,6 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
         const val TOKEN_PREFIX = "YourTar "
     }
 
-    fun clear() {
-        defPrefs.edit().clear().apply()
-    }
-
     fun setAccessToken(token: String) {
         defPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, TOKEN_PREFIX + token).apply()
     }
@@ -21,5 +17,8 @@ class UserPrefs(private val defPrefs: SharedPreferences) {
         return defPrefs.getString(PREF_KEY_ACCESS_TOKEN, null)
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 }

@@ -20,6 +20,7 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     val notes = MutableLiveData<List<Note>>()
     val showError = SingleLiveEvent<Void>()
 
+<<<<<<< HEAD
     fun onViewCreated() {
         if (interactor.isUserLoggedIn()) {
             getCachedNotes()
@@ -30,6 +31,8 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
         }
     }
 
+=======
+>>>>>>> dev
     fun onNoteClick(note: Note) {
         val bundle = Bundle()
         bundle.putSerializable(NoteFragment.NOTE_PARAMETER, note)
@@ -53,6 +56,16 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
             } catch (e: Exception) {
                 showError.call()
             }
+        }
+    }
+
+    fun onViewCreated() {
+        if (interactor.isUserLoggedIn()) {
+            getCachedNotes()
+            getNotesList()
+        }
+        else {
+            navController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
     }
 }
