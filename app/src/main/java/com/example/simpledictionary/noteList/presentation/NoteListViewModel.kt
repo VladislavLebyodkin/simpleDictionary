@@ -10,8 +10,11 @@ import com.example.simpledictionary.note.presentation.NoteFragment
 import com.example.simpledictionary.noteList.domain.Note
 import com.example.simpledictionary.noteList.domain.NoteListInteractor
 import com.example.simpledictionary.util.SingleLiveEvent
+import com.example.simpledictionary.util.log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
 
@@ -20,14 +23,16 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     val notes = MutableLiveData<List<Note>>()
     val showError = SingleLiveEvent<Void>()
 
-    fun onNoteClick(note: Note) {
-        val bundle = Bundle()
-        bundle.putSerializable(NoteFragment.NOTE_PARAMETER, note)
-        navController.navigate(R.id.action_mainFragment_to_noteFragment, bundle)
-    }
-
-    fun onShuffleClick() {
-        notes.value = notes.value?.shuffled()
+    fun onViewCreated() {
+        if (interactor.isUserLoggedIn()) {
+            if(notes.value == null) {
+                getNotesList()
+                getCachedNotes()
+            }
+        }
+        else {
+            navController.navigate(R.id.action_mainFragment_to_loginFragment)
+        }
     }
 
     private fun getCachedNotes() {
@@ -46,13 +51,17 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
         }
     }
 
-    fun onViewCreated() {
-        if (interactor.isUserLoggedIn()) {
-            getCachedNotes()
-            getNotesList()
-        }
-        else {
-            navController.navigate(R.id.action_mainFragment_to_loginFragment)
-        }
+    fun onNoteClick(note: Note) {
+        val bundle = Bundle()
+        bundle.putSerializable(NoteFragment.NOTE_PARAMETER, note)
+        navController.navigate(R.id.action_mainFragment_to_noteFragment, bundle)
+    }
+
+    fun onShuffleClick() {
+        notes.value = notes.value?.shuffled()
+    }
+
+    fun onAddNoteClick() {
+        navController.navigate(R.id.action_mainFragment_to_addNoteFragment)
     }
 }

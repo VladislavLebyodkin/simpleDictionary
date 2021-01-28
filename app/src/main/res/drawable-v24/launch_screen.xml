@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <item android:drawable="@drawable/test"/>
+    <item android:drawable="@color/fon" />
+
+    <item android:drawable="@drawable/book_200"
+        android:bottom="100dp"
+        android:gravity="center"/>
 
 </layer-list>

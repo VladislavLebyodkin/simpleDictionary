@@ -8,20 +8,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simpledictionary.R
-import com.example.simpledictionary.databinding.MainFragmentBinding
+import com.example.simpledictionary.databinding.NoteListFragmentBinding
+import com.example.simpledictionary.util.log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteListFragment : Fragment() {
 
     private val viewModel: NoteListViewModel by viewModel()
-    private lateinit var binding: MainFragmentBinding
+    private lateinit var binding: NoteListFragmentBinding
     private lateinit var mainAdapter: NoteListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
         setHasOptionsMenu(true)
-        binding = MainFragmentBinding.inflate(layoutInflater, container, false)
+        binding = NoteListFragmentBinding.inflate(layoutInflater, container, false)
 
         mainAdapter = NoteListAdapter { note ->
             viewModel.onNoteClick(note)
@@ -33,7 +34,7 @@ class NoteListFragment : Fragment() {
         }
 
         binding.btnAddNote.setOnClickListener {
-            viewModel.navController.navigate(R.id.action_mainFragment_to_addNoteFragment)
+            viewModel.onAddNoteClick()
         }
 
         return binding.root

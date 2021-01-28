@@ -23,4 +23,5 @@
     <string name="different_password">Пароли не совпадают</string>
     <string name="smth_wrong">Упс, что-то пошло не так</string>
     <string name="Upssss">Ups</string>
+    <string name="create_sentence">Составьте предложение</string>
 </resources>

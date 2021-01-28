@@ -18,6 +18,10 @@ class NoteListRepositoryImpl(
         return userPrefs.getAccessToken() != null
     }
 
+    override fun logOut() {
+        userPrefs.logOut()
+    }
+
     override suspend fun getNotes(): List<Note> {
         return notesDao.getNotesList().asReversed()
     }

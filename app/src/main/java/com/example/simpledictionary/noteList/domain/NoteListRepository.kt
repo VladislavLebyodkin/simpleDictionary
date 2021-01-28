@@ -8,4 +8,6 @@ interface NoteListRepository {
 
     fun userIsLogged(): Boolean
 
+    fun logOut()
+
 }

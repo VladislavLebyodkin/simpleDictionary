@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.MarginLayoutParamsCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpledictionary.R
 import com.example.simpledictionary.noteList.domain.Note
@@ -12,7 +14,7 @@ import kotlinx.android.synthetic.main.note_item.view.*
 
 
 class NoteListAdapter(
-    private val onNoteClicked: (Note) -> Unit
+        private val onNoteClicked: (Note) -> Unit
 ): RecyclerView.Adapter<NoteListAdapter.MainViewHolder>() {
 
     private var notesList = emptyList<Note>()
@@ -28,7 +30,12 @@ class NoteListAdapter(
         val note = notesList[position]
         holder.nameNote.text = note.word
         holder.translateNote.text = note.translate
-        holder.exampleNote.text = note.example
+
+        if (note.example.equals("")) {
+            holder.exampleNote.text = CREATE_SENTENCE
+        } else {
+            holder.exampleNote.text = note.example
+        }
 
         holder.cardNote.setOnClickListener {
             onNoteClicked(note)
@@ -38,8 +45,8 @@ class NoteListAdapter(
     override fun getItemCount() = notesList.size
 
     class MainViewHolder(
-        view: View,
-        onNoteClicked: (Int) -> Unit
+            view: View,
+            onNoteClicked: (Int) -> Unit
     ): RecyclerView.ViewHolder(view) {
 
         val cardNote: CardView = view.card_note
@@ -57,5 +64,9 @@ class NoteListAdapter(
     fun setList(list: List<Note>) {
         notesList = list
         notifyDataSetChanged()
+    }
+
+    companion object {
+        const val CREATE_SENTENCE = "Составьте предложение"
     }
 }

@@ -14,4 +14,8 @@ class NoteListInteractor(private val repository: NoteListRepository) {
         return repository.userIsLogged()
     }
 
+    fun logOut() {
+        repository.logOut()
+    }
+
 }
