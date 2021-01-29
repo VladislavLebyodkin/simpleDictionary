@@ -6,20 +6,18 @@ import androidx.navigation.NavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.login.domain.LoginInteractor
 import com.example.simpledictionary.util.SingleLiveEvent
-import com.example.simpledictionary.util.log
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class LoginViewModel(private val interactor: LoginInteractor) : ViewModel() {
 
     lateinit var navController: NavController
     val showError = SingleLiveEvent<Void>()
 
-    fun login(email: String, password: String) {
+    fun onLoginButtonClick(email: String, password: String) {
         viewModelScope.launch {
             try {
                 interactor.login(email, password)
-                navController.navigate(R.id.action_loginFragment_to_mainFragment)
+                navController.navigate(R.id.action_loginFragment_to_noteListFragment)
             } catch (e: Exception) {
                 showError.call()
             }

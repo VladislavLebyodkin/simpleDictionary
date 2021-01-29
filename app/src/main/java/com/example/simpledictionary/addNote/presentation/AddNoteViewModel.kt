@@ -17,7 +17,7 @@ class AddNoteViewModel(private val interactor: AddNoteInteractor) : ViewModel() 
         viewModelScope.launch {
             try {
                 interactor.createNote(name, translate, example)
-                navController.navigate(R.id.action_addNoteFragment_to_mainFragment)
+                navController.navigate(R.id.action_addNoteFragment_to_noteListFragment)
             } catch (e: Exception) {
                 showError.call()
             }

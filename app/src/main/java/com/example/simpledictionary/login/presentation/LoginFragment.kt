@@ -27,10 +27,14 @@ class LoginFragment : Fragment() {
         binding = LoginFragmentBinding.inflate(layoutInflater, container, false)
 
         binding.btnSubmitLogin.setOnClickListener {
-            viewModel.login(
-                binding.inputEmail.text.toString(),
-                binding.inputPassword.text.toString()
-            )
+            if(isValidEmail && isValidPassword) {
+                viewModel.onLoginButtonClick(
+                        binding.inputEmail.text.toString(),
+                        binding.inputPassword.text.toString()
+                )
+            } else {
+                Toast.makeText(context, R.string.fill_all_required_fields, Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.tvToRegister.setOnClickListener {
@@ -42,7 +46,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.navController = findNavController()
 
         binding.inputEmail.validate(getString(R.string.input_email)) { field ->

@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simpledictionary.R
@@ -24,6 +25,15 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
         binding = NoteListFragmentBinding.inflate(layoutInflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.navController = findNavController()
+
+        viewModel.onViewCreated()
+
         mainAdapter = NoteListAdapter { note ->
             viewModel.onNoteClick(note)
         }
@@ -36,14 +46,6 @@ class NoteListFragment : Fragment() {
         binding.btnAddNote.setOnClickListener {
             viewModel.onAddNoteClick()
         }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.navController = findNavController()
-        viewModel.onViewCreated()
 
         viewModel.notes.observe(viewLifecycleOwner) { list->
             mainAdapter.setList(list)

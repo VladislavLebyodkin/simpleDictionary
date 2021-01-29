@@ -10,11 +10,8 @@ import com.example.simpledictionary.note.presentation.NoteFragment
 import com.example.simpledictionary.noteList.domain.Note
 import com.example.simpledictionary.noteList.domain.NoteListInteractor
 import com.example.simpledictionary.util.SingleLiveEvent
-import com.example.simpledictionary.util.log
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
 
@@ -31,7 +28,10 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
             }
         }
         else {
-            navController.navigate(R.id.action_mainFragment_to_loginFragment)
+            viewModelScope.launch {
+                delay(1)
+                navController.navigate(R.id.action_noteListFragment_to_loginFragment)
+            }
         }
     }
 
@@ -54,7 +54,7 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     fun onNoteClick(note: Note) {
         val bundle = Bundle()
         bundle.putSerializable(NoteFragment.NOTE_PARAMETER, note)
-        navController.navigate(R.id.action_mainFragment_to_noteFragment, bundle)
+        navController.navigate(R.id.action_noteListFragment_to_noteFragment, bundle)
     }
 
     fun onShuffleClick() {
@@ -62,6 +62,6 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     }
 
     fun onAddNoteClick() {
-        navController.navigate(R.id.action_mainFragment_to_addNoteFragment)
+        navController.navigate(R.id.action_noteListFragment_to_addNoteFragment)
     }
 }

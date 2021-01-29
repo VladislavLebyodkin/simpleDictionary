@@ -30,11 +30,15 @@ class RegisterFragment : Fragment() {
         binding = RegisterFragmentBinding.inflate(layoutInflater, container, false)
 
         binding.btnSubmitRegister.setOnClickListener {
-            viewModel.register(
-                binding.inputEmail.text.toString(),
-                binding.inputPassword.text.toString(),
-                binding.inputConfirmPassword.text.toString()
-            )
+            if(isValidEmail && isValidPassword && isValidPasswordConfirm) {
+                viewModel.onRegisterButtonClick(
+                        binding.inputEmail.text.toString(),
+                        binding.inputPassword.text.toString(),
+                        binding.inputConfirmPassword.text.toString()
+                )
+            } else {
+                Toast.makeText(context, R.string.fill_all_required_fields, Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.tvToLogin.setOnClickListener {
@@ -59,8 +63,8 @@ class RegisterFragment : Fragment() {
             field.isValidPassword()
         }
 
-        binding.inputPassword.validate(getString(R.string.different_password)) { field ->
-            isValidPassword = field == binding.inputPassword.text.toString()
+        binding.inputConfirmPassword.validate(getString(R.string.different_password)) { field ->
+            isValidPasswordConfirm = field == binding.inputPassword.text.toString()
             field == binding.inputPassword.text.toString()
         }
 

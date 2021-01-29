@@ -6,7 +6,6 @@ import androidx.navigation.NavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.register.domain.RegisterInteractor
 import com.example.simpledictionary.util.SingleLiveEvent
-import com.example.simpledictionary.util.log
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -15,11 +14,11 @@ class RegisterViewModel(private val interactor: RegisterInteractor) : ViewModel(
     lateinit var navController: NavController
     val showError = SingleLiveEvent<Void>()
 
-    fun register(email: String, password: String, passwordConfirm: String) {
+    fun onRegisterButtonClick(email: String, password: String, passwordConfirm: String) {
         viewModelScope.launch {
             try {
                 interactor.register(email, password, passwordConfirm)
-                navController.navigate(R.id.action_registerFragment_to_mainFragment)
+                navController.navigate(R.id.action_registerFragment_to_noteListFragment)
             } catch (e: Exception) {
                 showError.call()
             }

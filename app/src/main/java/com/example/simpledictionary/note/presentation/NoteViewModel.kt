@@ -29,7 +29,7 @@ class NoteViewModel(
                     example = example
                 )
                 interactor.updateNote(newNote)
-                navController.navigate(R.id.action_noteFragment_to_mainFragment)
+                navController.navigate(R.id.action_noteFragment_to_noteListFragment)
             } catch (e: Exception) {
                 showError.call()
             }
@@ -41,7 +41,7 @@ class NoteViewModel(
         viewModelScope.launch {
             try {
                 interactor.deleteNote(id = note.id)
-                navController.navigate(R.id.action_noteFragment_to_mainFragment)
+                navController.navigate(R.id.action_noteFragment_to_noteListFragment)
             } catch (e: Exception) {
                 showError.call()
             }
