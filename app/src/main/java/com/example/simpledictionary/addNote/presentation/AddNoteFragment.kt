@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.simpledictionary.R
 import com.example.simpledictionary.databinding.AddNoteFragmentBinding
 import com.example.simpledictionary.util.isNotEmptyField
+import com.example.simpledictionary.util.log
 import com.example.simpledictionary.util.validate
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -57,6 +59,10 @@ class AddNoteFragment : Fragment() {
 
         viewModel.showError.observe(viewLifecycleOwner) {
             Toast.makeText(context, getString(R.string.smth_wrong), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.inputName.doAfterTextChanged {
+            log(it.toString())
         }
     }
 }

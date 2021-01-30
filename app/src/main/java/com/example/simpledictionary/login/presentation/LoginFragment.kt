@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.simpledictionary.R
@@ -60,6 +62,14 @@ class LoginFragment : Fragment() {
 
         viewModel.showError.observe(viewLifecycleOwner) {
             Toast.makeText(context, getString(R.string.smth_wrong), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.inputEmail.doOnTextChanged { text, start, before, count ->
+
+        }
+
+        binding.inputEmail.doAfterTextChanged {
+
         }
     }
 
