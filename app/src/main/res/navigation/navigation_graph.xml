@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.example.simpledictionary.noteList.presentation.NoteListFragment"
+        android:name="com.vlados_project.simpledictionary.noteList.presentation.NoteListFragment"
         android:label="note_list_fragment"
         tools:layout="@layout/note_list_fragment" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.example.simpledictionary.addNote.presentation.AddNoteFragment"
+        android:name="com.vlados_project.simpledictionary.addNote.presentation.AddNoteFragment"
         android:label="add_note_fragment"
         tools:layout="@layout/add_note_fragment" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
-        android:name="com.example.simpledictionary.note.presentation.NoteFragment"
+        android:name="com.vlados_project.simpledictionary.note.presentation.NoteFragment"
         android:label="note_fragment"
         tools:layout="@layout/note_fragment" >
         <action
@@ -59,11 +59,11 @@
             app:popUpTo="@id/navigation_graph" />
         <argument
             android:name="note"
-            app:argType="com.example.simpledictionary.noteList.domain.Note" />
+            app:argType="com.vlados_project.simpledictionary.noteList.domain.Note" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.simpledictionary.register.presentation.RegisterFragment"
+        android:name="com.vlados_project.simpledictionary.register.presentation.RegisterFragment"
         android:label="register_fragment"
         tools:layout="@layout/register_fragment" >
         <action
@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.simpledictionary.login.presentation.LoginFragment"
+        android:name="com.vlados_project.simpledictionary.login.presentation.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"

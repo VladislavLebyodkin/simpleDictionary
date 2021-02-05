@@ -6,9 +6,9 @@
     android:id="@+id/card_note"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    app:cardElevation="5dp"
-    app:cardCornerRadius="2dp"
+    android:layout_margin="@dimen/note_card_margin"
+    app:cardElevation="@dimen/note_card_elevation"
+    app:cardCornerRadius="@dimen/note_card_corner_radius"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

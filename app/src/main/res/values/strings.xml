@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SimpleDictionary</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_note">Добавить слово</string>
     <string name="add">Добавить</string>
     <string name="word">Слово</string>
@@ -18,10 +17,10 @@
     <string name="fill_all_required_fields">Заполните необходимые поля</string>
     <string name="input_word">Введите слово</string>
     <string name="input_translate">Введите перевод</string>
-    <string name="input_email">Введите корректный email</string>
+    <string name="incorrect_email">Введите корректный email</string>
     <string name="short_password">Слишком просто</string>
     <string name="different_password">Пароли не совпадают</string>
     <string name="smth_wrong">Упс, что-то пошло не так</string>
-    <string name="Upssss">Ups</string>
     <string name="create_sentence">Составьте предложение</string>
+    <string name="required_field">Обязательное поле</string>
 </resources>
