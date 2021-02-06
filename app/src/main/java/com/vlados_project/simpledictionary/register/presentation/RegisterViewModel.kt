@@ -2,12 +2,16 @@ package com.vlados_project.simpledictionary.register.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.base.ValidationInteractor
 import com.vlados_project.simpledictionary.register.domain.RegisterInteractor
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class RegisterViewModel(
         private val registerInteractor: RegisterInteractor,
@@ -22,9 +26,11 @@ class RegisterViewModel(
     val showError = SingleLiveEvent<Void>()
 
     fun onRegisterButtonClick(email: String, password: String, passwordConfirm: String) {
-        runBlocking {
+        viewModelScope.launch {
             try {
-                registerInteractor.register(email, password, passwordConfirm)
+                withContext(Dispatchers.IO) {
+                    registerInteractor.register(email, password, passwordConfirm)
+                }
                 navController.navigate(R.id.action_registerFragment_to_noteListFragment)
             } catch (e: Exception) {
                 showError.call()

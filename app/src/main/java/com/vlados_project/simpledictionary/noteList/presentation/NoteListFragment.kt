@@ -1,5 +1,6 @@
 package com.vlados_project.simpledictionary.noteList.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.databinding.NoteListFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -8,6 +8,7 @@ import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.addNote.domain.AddNoteInteractor
 import com.vlados_project.simpledictionary.base.ValidationInteractor
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddNoteViewModel(
@@ -20,12 +21,12 @@ class AddNoteViewModel(
     val isValidInputTranslate = MutableLiveData<Boolean>()
 
     fun createNote(name: String, translate: String, example: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 addNoteInteractor.createNote(name, translate, example)
                 navController.navigateUp()
             } catch (e: Exception) {
-                showError.call()
+                showError.postCall()
             }
         }
     }

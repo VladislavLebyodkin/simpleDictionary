@@ -9,6 +9,7 @@ import com.vlados_project.simpledictionary.base.ValidationInteractor
 import com.vlados_project.simpledictionary.note.domain.NoteInteractor
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -26,7 +27,7 @@ class NoteViewModel(
     val isValidInputTranslate = MutableLiveData<Boolean>()
 
     fun updateNote(name: String, translate: String, example: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newNote = note.copy(
                     word = name,
@@ -36,19 +37,18 @@ class NoteViewModel(
                 noteInteractor.updateNote(newNote)
                 navController.navigateUp()
             } catch (e: Exception) {
-                showError.call()
+                showError.postCall()
             }
-
         }
     }
 
     fun deleteNote() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 noteInteractor.deleteNote(id = note.id)
                 navController.navigateUp()
             } catch (e: Exception) {
-                showError.call()
+                showError.postCall()
             }
         }
     }

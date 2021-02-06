@@ -39,11 +39,13 @@ fun provideOkHttpClient(prefs: UserPrefs): OkHttpClient {
     val okHttpClient = OkHttpClient.Builder()
     okHttpClient.addInterceptor(logInterceptor)
 
-    if(prefs.getAccessToken() != null) {
+    val token = prefs.getAccessToken()
+
+    if (token != null) {
         okHttpClient.addInterceptor(object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
                 val newRequest: Request = chain.request().newBuilder()
-                    .addHeader(AUTH_KEY, prefs.getAccessToken()!!)
+                    .addHeader(AUTH_KEY, token)
                     .build()
                 return chain.proceed(newRequest)
             }

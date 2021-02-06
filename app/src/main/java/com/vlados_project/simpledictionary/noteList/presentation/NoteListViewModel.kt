@@ -11,6 +11,7 @@ import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.noteList.domain.NoteListInteractor
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
 import com.vlados_project.simpledictionary.util.log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -34,11 +35,11 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     }
 
     private fun loadNotesList() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 interactor.loadNotesList()
             } catch (e: Exception) {
-                showError.call()
+                showError.postCall()
             }
         }
     }

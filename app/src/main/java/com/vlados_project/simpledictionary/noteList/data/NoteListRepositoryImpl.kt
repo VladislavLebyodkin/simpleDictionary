@@ -30,8 +30,8 @@ class NoteListRepositoryImpl(
 
     override suspend fun loadNotesList(): List<Note> {
         val notes = notesApi.getAllWords()
-        notesDao.clearTable()
-        notesDao.insertAll(notes.toEntity())
+
+        notesDao.updateAll(notes.toEntity())
         return notes.toDomain()
     }
 

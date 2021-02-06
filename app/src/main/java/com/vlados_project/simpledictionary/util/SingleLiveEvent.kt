@@ -31,17 +31,18 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
         super.setValue(t)
     }
 
-    /**
-     * Used for cases where T is Void, to make calls cleaner.
-     */
-//    @MainThread
-//    fun call() {
-//        postValue(null)
-//    }
-
     @MainThread
     fun call() {
         value = null
+    }
+
+    override fun postValue(@Nullable t: T?) {
+        mPending.set(true)
+        super.postValue(t)
+    }
+
+    fun postCall() {
+        postValue(null)
     }
 
 }
