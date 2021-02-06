@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.databinding.LoginFragmentBinding
-import com.vlados_project.simpledictionary.util.isValidEmail
-import com.vlados_project.simpledictionary.util.isValidPassword
-import com.vlados_project.simpledictionary.util.validate
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {

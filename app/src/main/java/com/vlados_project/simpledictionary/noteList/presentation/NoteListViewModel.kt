@@ -10,7 +10,8 @@ import com.vlados_project.simpledictionary.note.presentation.NoteFragment
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.noteList.domain.NoteListInteractor
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
-import kotlinx.coroutines.delay
+import com.vlados_project.simpledictionary.util.log
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
@@ -20,31 +21,22 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
     val notes = MutableLiveData<List<Note>>()
     val showError = SingleLiveEvent<Void>()
 
-    fun onViewCreated() {
+    init {
         if (interactor.isUserLoggedIn()) {
-            if(notes.value == null) {
-                getNotesList()
-                getCachedNotes()
-            }
-        }
-        else {
             viewModelScope.launch {
-                delay(1)
-                navController.navigate(R.id.action_noteListFragment_to_loginFragment)
+                interactor.getNotesAsFlow().collect {
+                    notes.value = it
+                }
             }
+
+            loadNotesList()
         }
     }
 
-    private fun getCachedNotes() {
-        viewModelScope.launch {
-            notes.value = interactor.getCachedNotesList()
-        }
-    }
-
-    private fun getNotesList() {
+    private fun loadNotesList() {
         viewModelScope.launch {
             try {
-                notes.value = interactor.getNotesList()
+                interactor.loadNotesList()
             } catch (e: Exception) {
                 showError.call()
             }
@@ -71,4 +63,5 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
             navController.navigate(R.id.action_noteListFragment_to_loginFragment)
         }
     }
+
 }

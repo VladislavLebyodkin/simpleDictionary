@@ -23,7 +23,7 @@ class AddNoteViewModel(
         viewModelScope.launch {
             try {
                 addNoteInteractor.createNote(name, translate, example)
-                navController.navigate(R.id.action_addNoteFragment_to_noteListFragment)
+                navController.navigateUp()
             } catch (e: Exception) {
                 showError.call()
             }

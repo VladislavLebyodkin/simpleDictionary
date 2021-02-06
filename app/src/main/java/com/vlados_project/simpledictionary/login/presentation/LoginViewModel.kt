@@ -2,14 +2,11 @@ package com.vlados_project.simpledictionary.login.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.base.ValidationInteractor
 import com.vlados_project.simpledictionary.login.domain.LoginInteractor
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
-import com.vlados_project.simpledictionary.util.log
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class LoginViewModel(

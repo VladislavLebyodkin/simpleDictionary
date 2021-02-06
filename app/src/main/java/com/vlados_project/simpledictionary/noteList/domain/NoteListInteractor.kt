@@ -1,12 +1,14 @@
 package com.vlados_project.simpledictionary.noteList.domain
 
+import kotlinx.coroutines.flow.Flow
+
 class NoteListInteractor(private val repository: NoteListRepository) {
 
-    suspend fun getNotesList(): List<Note> {
+    suspend fun loadNotesList(): List<Note> {
         return repository.loadNotesList()
     }
 
-    suspend fun getCachedNotesList(): List<Note> {
+    suspend fun getNotesAsFlow(): Flow<List<Note>> {
         return repository.getNotes()
     }
 

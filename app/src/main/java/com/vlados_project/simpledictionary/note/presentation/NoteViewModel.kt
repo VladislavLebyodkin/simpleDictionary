@@ -34,7 +34,7 @@ class NoteViewModel(
                     example = example
                 )
                 noteInteractor.updateNote(newNote)
-                navController.navigate(R.id.action_noteFragment_to_noteListFragment)
+                navController.navigateUp()
             } catch (e: Exception) {
                 showError.call()
             }
@@ -46,7 +46,7 @@ class NoteViewModel(
         viewModelScope.launch {
             try {
                 noteInteractor.deleteNote(id = note.id)
-                navController.navigate(R.id.action_noteFragment_to_noteListFragment)
+                navController.navigateUp()
             } catch (e: Exception) {
                 showError.call()
             }

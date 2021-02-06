@@ -15,7 +15,7 @@ class NoteListFragment : Fragment() {
 
     private val viewModel: NoteListViewModel by viewModel()
     private lateinit var binding: NoteListFragmentBinding
-    private lateinit var mainAdapter: NoteListAdapter
+    private lateinit var noteListAdapter: NoteListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -30,14 +30,12 @@ class NoteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.navController = findNavController()
 
-        viewModel.onViewCreated()
-
-        mainAdapter = NoteListAdapter { note ->
+        noteListAdapter = NoteListAdapter { note ->
             viewModel.onNoteClick(note)
         }
 
         binding.recyclerView.apply {
-            adapter = mainAdapter
+            adapter = noteListAdapter
             layoutManager = LinearLayoutManager(this.context)
         }
 
@@ -46,9 +44,9 @@ class NoteListFragment : Fragment() {
         }
 
         viewModel.notes.observe(viewLifecycleOwner) { list->
-            mainAdapter.setList(list)
+            noteListAdapter.submitList(list)
 
-            binding.tvListEmpty.isVisible = mainAdapter.itemCount == 0
+            binding.tvListEmpty.isVisible = list.isEmpty()
         }
 
         viewModel.showError.observe(viewLifecycleOwner) {
