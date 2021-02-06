@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".register.presentation.RegisterFragment">
 
-
     <EditText
         android:id="@+id/input_email"
         android:layout_width="match_parent"
