@@ -3,6 +3,7 @@ package com.vlados_project.simpledictionary.note.data
 import com.vlados_project.simpledictionary.note.domain.NoteRepository
 import com.vlados_project.simpledictionary.noteList.data.local.NotesDao
 import com.vlados_project.simpledictionary.noteList.data.remote.NotesApi
+import com.vlados_project.simpledictionary.noteList.data.remote.toEntity
 import com.vlados_project.simpledictionary.noteList.domain.Note
 
 class NoteRepositoryImpl(
@@ -17,7 +18,7 @@ class NoteRepositoryImpl(
 
     override suspend fun updateNote(note: Note) {
         val editedNote = notesApi.updateNote(note.id, note.toEditRequestDto())
-        notesDao.insert(editedNote.editedNote)
+        notesDao.insert(editedNote.editedNote.toEntity())
     }
 
 }

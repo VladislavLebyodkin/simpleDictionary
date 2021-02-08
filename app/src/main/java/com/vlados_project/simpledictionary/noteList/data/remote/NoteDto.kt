@@ -1,11 +1,12 @@
 package com.vlados_project.simpledictionary.noteList.data.remote
 
-import com.vlados_project.simpledictionary.noteList.data.local.NoteDto
+import com.vlados_project.simpledictionary.noteList.data.local.NoteEntity
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.google.gson.annotations.SerializedName
 
 data class NotesDto(
-        @SerializedName("data") val notes: List<NoteDto>
+    @SerializedName("data") val notes: List<NoteDto>,
+    @SerializedName("message") val message: String
 )
 
 data class NoteDto(
@@ -30,9 +31,9 @@ fun NotesDto.toDomain(): List<Note> {
     }
 }
 
-fun NotesDto.toEntity(): List<NoteDto> {
+fun NotesDto.toEntity(): List<NoteEntity> {
     return notes.map {
-        NoteDto(
+        NoteEntity(
                 id = it.id,
                 word = it.word,
                 translate = it.translate,
@@ -45,8 +46,8 @@ fun NotesDto.toEntity(): List<NoteDto> {
     }
 }
 
-fun NoteDto.toEntity(): NoteDto {
-    return NoteDto(
+fun NoteDto.toEntity(): NoteEntity {
+    return NoteEntity(
             id = id,
             word = word,
             translate = translate,

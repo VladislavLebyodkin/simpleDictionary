@@ -1,8 +1,8 @@
 package com.vlados_project.simpledictionary.noteList.data.local
 
 import androidx.room.*
-import com.vlados_project.simpledictionary.noteList.data.local.NoteDto.Companion.COLUMN_ID
-import com.vlados_project.simpledictionary.noteList.data.local.NoteDto.Companion.TABLE_NAME
+import com.vlados_project.simpledictionary.noteList.data.local.NoteEntity.Companion.COLUMN_ID
+import com.vlados_project.simpledictionary.noteList.data.local.NoteEntity.Companion.TABLE_NAME
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import kotlinx.coroutines.flow.Flow
 
@@ -13,22 +13,22 @@ interface NotesDao {
     fun getNotesList(): Flow<List<Note>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(notes: List<NoteDto>)
+    suspend fun insertAll(notes: List<NoteEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(notes: NoteDto)
+    suspend fun insert(notes: NoteEntity)
 
     @Query("DELETE FROM $TABLE_NAME WHERE $COLUMN_ID = :id")
     suspend fun deleteById(id: Long)
 
     @Delete
-    suspend fun delete(note: NoteDto)
+    suspend fun delete(note: NoteEntity)
 
     @Query("DELETE FROM $TABLE_NAME")
     suspend fun clearTable()
 
     @Transaction
-    suspend fun updateAll(notes: List<NoteDto>) {
+    suspend fun updateAll(notes: List<NoteEntity>) {
         clearTable()
         insertAll(notes)
     }

@@ -6,6 +6,7 @@ import com.vlados_project.simpledictionary.noteList.data.remote.toDomain
 import com.vlados_project.simpledictionary.noteList.data.remote.toEntity
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.noteList.domain.NoteListRepository
+import com.vlados_project.simpledictionary.util.log
 import com.vlados_project.simpledictionary.util.prefs.UserPrefs
 import kotlinx.coroutines.flow.Flow
 
@@ -30,6 +31,7 @@ class NoteListRepositoryImpl(
 
     override suspend fun loadNotesList(): List<Note> {
         val notes = notesApi.getAllWords()
+        log(notes.message)
 
         notesDao.updateAll(notes.toEntity())
         return notes.toDomain()

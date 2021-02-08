@@ -7,8 +7,11 @@ import androidx.navigation.NavController
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.addNote.domain.AddNoteInteractor
 import com.vlados_project.simpledictionary.base.ValidationInteractor
+import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
+import com.vlados_project.simpledictionary.util.log
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AddNoteViewModel(

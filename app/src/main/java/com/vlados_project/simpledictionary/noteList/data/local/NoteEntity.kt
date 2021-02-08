@@ -3,10 +3,10 @@ package com.vlados_project.simpledictionary.noteList.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.vlados_project.simpledictionary.noteList.data.local.NoteDto.Companion.TABLE_NAME
+import com.vlados_project.simpledictionary.noteList.data.local.NoteEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
-data class NoteDto (
+data class NoteEntity (
         @PrimaryKey val id: Long,
         @ColumnInfo(name = "word") val word: String,
         @ColumnInfo(name = "translate") val translate: String,
