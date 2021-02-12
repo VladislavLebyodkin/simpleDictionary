@@ -1,15 +1,19 @@
 package com.vlados_project.simpledictionary.login.presentation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.databinding.LoginFragmentBinding
+import com.vlados_project.simpledictionary.util.log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {

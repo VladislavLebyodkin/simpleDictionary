@@ -1,6 +1,7 @@
 package com.vlados_project.simpledictionary.util.prefs
 
 import android.content.SharedPreferences
+import com.vlados_project.simpledictionary.util.log
 
 class UserPrefs(private val defPrefs: SharedPreferences) {
 

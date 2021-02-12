@@ -2,10 +2,10 @@ package com.vlados_project.simpledictionary.network
 
 import com.vlados_project.simpledictionary.BuildConfig
 import com.vlados_project.simpledictionary.noteList.data.remote.NotesApi
+import com.vlados_project.simpledictionary.util.log
 import com.vlados_project.simpledictionary.util.prefs.UserPrefs
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -15,8 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
     single { provideOkHttpClient(get()) }
-    factory { provideAuthApi(get()) }
-    factory { provideNotesApi(get()) }
+    single { provideNotesApi(get()) }
+    single { provideAuthApi(get()) }
     single { provideRetrofit(get()) }
 }
 
@@ -31,31 +31,37 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
 }
 
 fun provideOkHttpClient(prefs: UserPrefs): OkHttpClient {
+    val okHttpClient = OkHttpClient.Builder()
 
     val logInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val okHttpClient = OkHttpClient.Builder()
     okHttpClient.addInterceptor(logInterceptor)
 
-    val token = prefs.getAccessToken()
+    val headerInterceptor = object : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val request = chain.request()
+            val token = prefs.getAccessToken()
 
-    if (token != null) {
-        okHttpClient.addInterceptor(object : Interceptor {
-            override fun intercept(chain: Interceptor.Chain): Response {
-                val newRequest: Request = chain.request().newBuilder()
+            return if(token != null) {
+                return chain.proceed(chain.request()
+                    .newBuilder()
                     .addHeader(AUTH_KEY, token)
-                    .build()
-                return chain.proceed(newRequest)
+                    .build())
+            } else {
+                chain.proceed(request)
             }
-        })
+        }
     }
+
+    okHttpClient.addInterceptor(headerInterceptor)
 
     return okHttpClient.build()
 }
 
+fun provideNotesApi(retrofit: Retrofit): NotesApi = retrofit.create(NotesApi::class.java)
+
 fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
-fun provideNotesApi(retrofit: Retrofit): NotesApi = retrofit.create(NotesApi::class.java)
 

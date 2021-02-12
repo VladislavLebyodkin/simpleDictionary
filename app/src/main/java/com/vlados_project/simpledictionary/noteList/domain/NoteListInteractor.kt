@@ -4,8 +4,8 @@ import kotlinx.coroutines.flow.Flow
 
 class NoteListInteractor(private val repository: NoteListRepository) {
 
-    suspend fun loadNotesList(): List<Note> {
-        return repository.loadNotesList()
+    suspend fun loadNotesList() {
+        repository.loadNotesList()
     }
 
     suspend fun getNotesAsFlow(): Flow<List<Note>> {

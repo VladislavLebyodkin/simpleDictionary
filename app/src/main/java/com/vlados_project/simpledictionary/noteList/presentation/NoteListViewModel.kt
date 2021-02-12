@@ -10,10 +10,10 @@ import com.vlados_project.simpledictionary.note.presentation.NoteFragment
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.noteList.domain.NoteListInteractor
 import com.vlados_project.simpledictionary.util.SingleLiveEvent
+import com.vlados_project.simpledictionary.util.isCompletedOrCancelled
 import com.vlados_project.simpledictionary.util.log
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel() {
 
@@ -32,15 +32,33 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
 
             loadNotesList()
         }
+        else {
+            viewModelScope.launch {
+                delay(1)
+                navController.navigate(R.id.action_noteListFragment_to_loginFragment)
+            }
+        }
     }
 
+    var loadingJob: Job? = null
+
     private fun loadNotesList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        loadingJob?.cancel()
+
+        loadingJob = viewModelScope.launch {
             try {
-                interactor.loadNotesList()
+                withContext(Dispatchers.IO) {
+                    interactor.loadNotesList()
+                }
             } catch (e: Exception) {
                 showError.postCall()
             }
+        }
+    }
+
+    fun onScrolled(totalCount: Int, lastVisibleItemPosition: Int) {
+        if (loadingJob.isCompletedOrCancelled() && lastVisibleItemPosition + 8 >= totalCount) {
+            loadNotesList()
         }
     }
 
@@ -48,10 +66,6 @@ class NoteListViewModel (private val interactor: NoteListInteractor) : ViewModel
         val bundle = Bundle()
         bundle.putSerializable(NoteFragment.NOTE_PARAMETER, note)
         navController.navigate(R.id.action_noteListFragment_to_noteFragment, bundle)
-    }
-
-    fun onShuffleClick() {
-        notes.value = notes.value?.shuffled()
     }
 
     fun onAddNoteClick() {

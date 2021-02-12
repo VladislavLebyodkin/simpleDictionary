@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/app_margin"
         android:hint="@string/email"
+        android:text="ww@ww.ww"
         />
 
     <EditText
@@ -28,6 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/input_email"
         android:layout_margin="@dimen/app_margin"
         android:hint="@string/password"
+        android:text="www"
         />
 
     <Button

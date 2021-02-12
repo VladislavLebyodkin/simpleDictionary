@@ -2,11 +2,9 @@ package com.vlados_project.simpledictionary.noteList.data
 
 import com.vlados_project.simpledictionary.noteList.data.local.NotesDao
 import com.vlados_project.simpledictionary.noteList.data.remote.NotesApi
-import com.vlados_project.simpledictionary.noteList.data.remote.toDomain
 import com.vlados_project.simpledictionary.noteList.data.remote.toEntity
 import com.vlados_project.simpledictionary.noteList.domain.Note
 import com.vlados_project.simpledictionary.noteList.domain.NoteListRepository
-import com.vlados_project.simpledictionary.util.log
 import com.vlados_project.simpledictionary.util.prefs.UserPrefs
 import kotlinx.coroutines.flow.Flow
 
@@ -16,6 +14,12 @@ class NoteListRepositoryImpl(
         private val notesDao: NotesDao
 ): NoteListRepository {
 
+    companion object {
+        private const val OFFSET = 30
+    }
+
+    private var startPosition = 0
+
     override fun userIsLogged(): Boolean {
         return userPrefs.getAccessToken() != null
     }
@@ -23,18 +27,18 @@ class NoteListRepositoryImpl(
     override suspend fun logOut() {
         notesDao.clearTable()
         userPrefs.logOut()
+        startPosition = 0
     }
 
     override suspend fun getNotes(): Flow<List<Note>> {
-        return notesDao.getNotesList()
+        return notesDao.getNotesListAsFlow()
     }
 
-    override suspend fun loadNotesList(): List<Note> {
-        val notes = notesApi.getAllWords()
-        log(notes.message)
+    override suspend fun loadNotesList() {
+        startPosition = OFFSET * (notesDao.getNotesList().size / OFFSET)
 
-        notesDao.updateAll(notes.toEntity())
-        return notes.toDomain()
+        val notes = notesApi.getAllWords(startPosition)
+
+        notesDao.insertAll(notes.toEntity())
     }
-
 }

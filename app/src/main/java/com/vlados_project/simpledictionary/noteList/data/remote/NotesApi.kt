@@ -8,7 +8,7 @@ import retrofit2.http.*
 interface NotesApi {
 
     @GET("note/list")
-    suspend fun getAllWords() : NotesDto
+    suspend fun getAllWords(@Query("offset") startPosition: Int) : NotesDto
 
     @FormUrlEncoded
     @POST("note")

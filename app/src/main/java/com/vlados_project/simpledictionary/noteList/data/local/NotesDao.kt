@@ -10,13 +10,16 @@ import kotlinx.coroutines.flow.Flow
 interface NotesDao {
 
     @Query("SELECT * FROM $TABLE_NAME")
-    fun getNotesList(): Flow<List<Note>>
+    fun getNotesListAsFlow(): Flow<List<Note>>
+
+    @Query("SELECT * FROM $TABLE_NAME")
+    fun getNotesList(): List<Note>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(notes: List<NoteEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(notes: NoteEntity)
+    suspend fun insert(note: NoteEntity)
 
     @Query("DELETE FROM $TABLE_NAME WHERE $COLUMN_ID = :id")
     suspend fun deleteById(id: Long)
@@ -28,8 +31,8 @@ interface NotesDao {
     suspend fun clearTable()
 
     @Transaction
-    suspend fun updateAll(notes: List<NoteEntity>) {
-        clearTable()
+    suspend fun clearAndUpdateAll(notes: List<NoteEntity>) {
+//        clearTable()
         insertAll(notes)
     }
 
