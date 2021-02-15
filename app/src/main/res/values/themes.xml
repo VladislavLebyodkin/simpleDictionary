@@ -20,7 +20,6 @@
 
     <style name="EmailTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:hint">@string/email</item>
-        <item name="android:inputType">textEmailAddress</item>
         <item name="android:layout_margin">@dimen/app_margin</item>
         <item name="startIconDrawable">@drawable/ic_email_24</item>
         <item name="endIconMode">clear_text</item>

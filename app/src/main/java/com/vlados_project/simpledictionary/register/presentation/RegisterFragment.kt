@@ -26,9 +26,9 @@ class RegisterFragment : Fragment() {
         binding.btnSubmitRegister.setOnClickListener {
             if(viewModel.formIsValid()) {
                 viewModel.onRegisterButtonClick(
-                        binding.inputEmail.text.toString(),
-                        binding.inputPassword.text.toString(),
-                        binding.inputPasswordConfirm.text.toString()
+                        binding.inputEmail.editText?.text.toString(),
+                        binding.inputPassword.editText?.text.toString(),
+                        binding.inputPasswordConfirm.editText?.text.toString()
                 )
             } else {
                 Toast.makeText(context, R.string.fill_all_required_fields, Toast.LENGTH_SHORT).show()
@@ -47,38 +47,48 @@ class RegisterFragment : Fragment() {
 
         viewModel.navController = findNavController()
 
-        viewModel.inputEmailTextChanged(binding.inputEmail.text.toString())
-        viewModel.inputPasswordTextChanged(binding.inputPassword.text.toString())
+        viewModel.inputEmailTextChanged(binding.inputEmail.editText?.text.toString())
+        viewModel.inputPasswordTextChanged(binding.inputPassword.editText?.text.toString())
+        viewModel.inputPasswordConfirmTextChanged(
+            binding.inputPassword.editText?.text.toString(),
+            binding.inputPasswordConfirm.editText?.text.toString()
+        )
 
-        binding.inputEmail.doAfterTextChanged {
+        binding.inputEmail.editText?.doAfterTextChanged {
             viewModel.inputEmailTextChanged(it.toString())
         }
 
-        binding.inputPassword.doAfterTextChanged {
+        binding.inputPassword.editText?.doAfterTextChanged {
             viewModel.inputPasswordTextChanged(it.toString())
         }
 
-        binding.inputPasswordConfirm.doAfterTextChanged {
+        binding.inputPasswordConfirm.editText?.doAfterTextChanged {
             viewModel.inputPasswordConfirmTextChanged(
-                    binding.inputPassword.text.toString(),
+                    binding.inputPassword.editText?.text.toString(),
                     it.toString())
         }
 
         viewModel.isValidEmail.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
                 binding.inputEmail.error = getString(R.string.incorrect_email)
+            } else {
+                binding.inputEmail.error = null
             }
         }
 
         viewModel.isValidPassword.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
                 binding.inputPassword.error = getString(R.string.short_password)
+            } else {
+                binding.inputPassword.error = null
             }
         }
 
         viewModel.isValidPasswordConfirm.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
                 binding.inputPasswordConfirm.error = getString(R.string.different_password)
+            } else {
+                binding.inputPasswordConfirm.error = null
             }
         }
 
