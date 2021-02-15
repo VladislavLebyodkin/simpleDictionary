@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NotesDao {
 
-    @Query("SELECT * FROM $TABLE_NAME")
+    @Query("SELECT * FROM $TABLE_NAME ORDER BY id")
     fun getNotesListAsFlow(): Flow<List<Note>>
 
     @Query("SELECT * FROM $TABLE_NAME")
@@ -29,11 +29,5 @@ interface NotesDao {
 
     @Query("DELETE FROM $TABLE_NAME")
     suspend fun clearTable()
-
-    @Transaction
-    suspend fun clearAndUpdateAll(notes: List<NoteEntity>) {
-//        clearTable()
-        insertAll(notes)
-    }
 
 }

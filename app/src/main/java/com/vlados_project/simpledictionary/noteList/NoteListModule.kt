@@ -16,5 +16,4 @@ val noteListModule = module {
     factory { NoteListInteractor(get()) }
     single<NoteListRepository> { NoteListRepositoryImpl(get(), get(), get()) }
 
-
 }

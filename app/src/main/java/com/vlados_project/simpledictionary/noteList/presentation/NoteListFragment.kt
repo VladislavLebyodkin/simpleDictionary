@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vlados_project.simpledictionary.R
 import com.vlados_project.simpledictionary.databinding.NoteListFragmentBinding
 import com.vlados_project.simpledictionary.util.log
+import kotlinx.android.synthetic.main.note_list_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -56,6 +57,7 @@ class NoteListFragment : Fragment() {
         }
 
         viewModel.notes.observe(viewLifecycleOwner) { list ->
+            log(list)
             noteListAdapter.submitList(list)
 
             binding.tvListEmpty.isVisible = list.isEmpty()
@@ -73,6 +75,12 @@ class NoteListFragment : Fragment() {
                 val lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition()
 
                 viewModel.onScrolled(totalCount, lastVisibleItemPosition)
+
+                if(dy > 0 && binding.btnAddNote.visibility == View.VISIBLE) {
+                    binding.btnAddNote.hide()
+                } else if (dy < 0 && binding.btnAddNote.visibility != View.VISIBLE) {
+                    binding.btnAddNote.show()
+                }
             }
         })
     }

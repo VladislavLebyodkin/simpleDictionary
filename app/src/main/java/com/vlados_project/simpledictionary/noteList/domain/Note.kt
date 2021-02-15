@@ -7,4 +7,8 @@ data class Note(
         val word: String,
         val translate: String,
         val example: String? = ""
-): Serializable
+): Serializable {
+        override fun toString(): String {
+                return this.id.toString()
+        }
+}
