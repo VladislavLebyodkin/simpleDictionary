@@ -47,6 +47,9 @@ class RegisterFragment : Fragment() {
 
         viewModel.navController = findNavController()
 
+        viewModel.inputEmailTextChanged(binding.inputEmail.text.toString())
+        viewModel.inputPasswordTextChanged(binding.inputPassword.text.toString())
+
         binding.inputEmail.doAfterTextChanged {
             viewModel.inputEmailTextChanged(it.toString())
         }

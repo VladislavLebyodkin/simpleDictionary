@@ -28,8 +28,8 @@ class LoginFragment : Fragment() {
         binding.btnSubmitLogin.setOnClickListener {
             if(viewModel.isValidEmail.value == true && viewModel.isValidPassword.value == true) {
                 viewModel.onLoginButtonClick(
-                        binding.inputEmail.text.toString(),
-                        binding.inputPassword.text.toString()
+                        binding.inputEmail.editText?.text.toString(),
+                        binding.inputPassword.editText?.text.toString()
                 )
             } else {
                 Toast.makeText(context, R.string.fill_all_required_fields, Toast.LENGTH_SHORT).show()
@@ -47,26 +47,30 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.navController = findNavController()
 
-        viewModel.inputEmailTextChanged(binding.inputEmail.text.toString())
-        viewModel.inputPasswordTextChanged(binding.inputPassword.text.toString())
+        viewModel.inputEmailTextChanged(binding.inputEmail.editText?.text.toString())
+        viewModel.inputPasswordTextChanged(binding.inputPassword.editText?.text.toString())
 
-        binding.inputEmail.doAfterTextChanged {
+        binding.inputEmail.editText?.doAfterTextChanged {
             viewModel.inputEmailTextChanged(it.toString())
         }
 
-        binding.inputPassword.doAfterTextChanged {
+        binding.inputPassword.editText?.doAfterTextChanged {
             viewModel.inputPasswordTextChanged(it.toString())
         }
 
         viewModel.isValidEmail.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
                 binding.inputEmail.error = getString(R.string.incorrect_email)
+            } else {
+                binding.inputPassword.error = null
             }
         }
 
         viewModel.isValidPassword.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
                 binding.inputPassword.error = getString(R.string.short_password)
+            } else {
+                binding.inputPassword.error = null
             }
         }
 
