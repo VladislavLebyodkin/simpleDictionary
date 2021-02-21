@@ -6,41 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".note.presentation.NoteFragment">
 
-    <EditText
-        android:id="@+id/input_name_edit"
+    <include
+        layout="@layout/note_view"
+        android:id="@+id/note_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/input_word"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/app_margin"
-        />
-
-    <EditText
-        android:id="@+id/input_translate_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/input_translate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_name_edit"
-        android:layout_margin="@dimen/app_margin"
-        />
-
-
-    <EditText
-        android:id="@+id/input_example_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:hint="@string/input_translate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_translate_edit"
-        android:layout_margin="@dimen/app_margin"
         />
 
     <Button
@@ -50,7 +22,7 @@
         android:text="@string/edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_example_edit"
+        app:layout_constraintTop_toBottomOf="@+id/note_view"
         android:layout_margin="@dimen/app_margin"
         />
 

@@ -6,46 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".addNote.presentation.AddNoteFragment">
 
-    <EditText
-        android:id="@+id/input_name"
+    <include
+        layout="@layout/note_view"
+        android:id="@+id/note_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/word"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:maxLines="1"
-        android:inputType="textAutoComplete"
-        android:layout_margin="@dimen/app_margin"
-        android:importantForAutofill="no"
-        />
-
-    <EditText
-        android:id="@+id/input_translate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/translate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_name"
-        android:maxLines="1"
-        android:inputType="textAutoComplete"
-        android:layout_margin="@dimen/app_margin"
-        android:importantForAutofill="no"
-        />
-
-    <EditText
-        android:id="@+id/inputExample"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/example"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_translate"
-        android:layout_margin="@dimen/app_margin"
-        android:importantForAutofill="no"
         />
 
     <Button
@@ -55,7 +22,7 @@
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputExample"
+        app:layout_constraintTop_toBottomOf="@+id/note_view"
         android:layout_margin="@dimen/app_margin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

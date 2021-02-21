@@ -24,9 +24,9 @@ class AddNoteFragment : Fragment() {
         binding.btnSubmit.setOnClickListener {
             if (viewModel.isValidInputName.value == true && viewModel.isValidInputTranslate.value == true) {
                 viewModel.createNote(
-                        binding.inputName.text.toString(),
-                        binding.inputTranslate.text.toString(),
-                        binding.inputExample.text.toString()
+                        binding.noteView.inputName.editText?.text.toString(),
+                        binding.noteView.inputTranslate.editText?.text.toString(),
+                        binding.noteView.inputExample.editText?.text.toString()
                 )
             } else {
                 Toast.makeText(context, getString(R.string.fill_all_required_fields), Toast.LENGTH_SHORT).show()
@@ -41,28 +41,39 @@ class AddNoteFragment : Fragment() {
 
         viewModel.navController = findNavController()
 
-        binding.inputName.doAfterTextChanged {
+        startValidation()
+
+        binding.noteView.inputName.editText?.doAfterTextChanged {
             viewModel.inputNameTextChanged(it.toString())
         }
 
-        binding.inputTranslate.doAfterTextChanged {
+        binding.noteView.inputTranslate.editText?.doAfterTextChanged {
             viewModel.inputTranslateTextChanged(it.toString())
         }
 
         viewModel.isValidInputName.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
-                binding.inputName.error = getString(R.string.required_field)
+                binding.noteView.inputName.error = getString(R.string.required_field)
+            } else {
+                binding.noteView.inputName.error = null
             }
         }
 
         viewModel.isValidInputTranslate.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
-                binding.inputTranslate.error = getString(R.string.required_field)
+                binding.noteView.inputTranslate.error = getString(R.string.required_field)
+            } else {
+                binding.noteView.inputTranslate.error = null
             }
         }
 
         viewModel.showError.observe(viewLifecycleOwner) {
             Toast.makeText(context, getString(R.string.smth_wrong), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun startValidation() {
+        viewModel.inputNameTextChanged(binding.noteView.inputName.editText?.text.toString())
+        viewModel.inputTranslateTextChanged(binding.noteView.inputTranslate.editText?.text.toString())
     }
 }

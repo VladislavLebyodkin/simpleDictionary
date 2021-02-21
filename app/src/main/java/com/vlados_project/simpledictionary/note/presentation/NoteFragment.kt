@@ -24,14 +24,6 @@ class NoteFragment : Fragment() {
         const val NOTE_PARAMETER = "note"
     }
 
-    private fun setFields(note: Note) {
-        binding.run {
-            inputNameEdit.setText(note.word)
-            inputTranslateEdit.setText(note.translate)
-            inputExampleEdit.setText(note.example)
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
@@ -41,9 +33,9 @@ class NoteFragment : Fragment() {
         binding.btnSubmitEdit.setOnClickListener {
             if (viewModel.isValidInputName.value == true && viewModel.isValidInputTranslate.value == true ) {
                 viewModel.updateNote(
-                        binding.inputNameEdit.text.toString(),
-                        binding.inputTranslateEdit.text.toString(),
-                        binding.inputExampleEdit.text.toString(),
+                        binding.noteView.inputName.editText?.text.toString(),
+                        binding.noteView.inputTranslate.editText?.text.toString(),
+                        binding.noteView.inputExample.editText?.text.toString(),
                 )
             } else {
                 Toast.makeText(context, getString(R.string.fill_all_required_fields), Toast.LENGTH_SHORT).show()
@@ -59,25 +51,31 @@ class NoteFragment : Fragment() {
             setFields(note)
         }
 
+        startValidation()
+
         viewModel.navController = findNavController()
 
-        binding.inputNameEdit.doAfterTextChanged {
+        binding.noteView.inputName.editText?.doAfterTextChanged {
             viewModel.inputNameTextChanged(it.toString())
         }
 
-        binding.inputTranslateEdit.doAfterTextChanged {
+        binding.noteView.inputTranslate.editText?.doAfterTextChanged {
             viewModel.inputTranslateTextChanged(it.toString())
         }
 
         viewModel.isValidInputName.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
-                binding.inputNameEdit.error = getString(R.string.required_field)
+                binding.noteView.inputName.error = getString(R.string.required_field)
+            } else {
+                binding.noteView.inputName.error = null
             }
         }
 
         viewModel.isValidInputTranslate.observe(viewLifecycleOwner) { isValid ->
             if (!isValid) {
-                binding.inputTranslateEdit.error = getString(R.string.required_field)
+                binding.noteView.inputTranslate.error = getString(R.string.required_field)
+            } else {
+                binding.noteView.inputTranslate.error = null
             }
         }
 
@@ -97,6 +95,19 @@ class NoteFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setFields(note: Note) {
+        binding.noteView.run {
+            inputName.editText?.setText(note.word)
+            inputTranslate.editText?.setText(note.translate)
+            inputExample.editText?.setText(note.example)
+        }
+    }
+
+    private fun startValidation() {
+        viewModel.inputNameTextChanged(binding.noteView.inputName.editText?.text.toString())
+        viewModel.inputTranslateTextChanged(binding.noteView.inputTranslate.editText?.text.toString())
     }
 
 }

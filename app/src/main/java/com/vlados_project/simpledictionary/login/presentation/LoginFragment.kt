@@ -47,8 +47,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.navController = findNavController()
 
-        viewModel.inputEmailTextChanged(binding.inputEmail.editText?.text.toString())
-        viewModel.inputPasswordTextChanged(binding.inputPassword.editText?.text.toString())
+        startValidation()
 
         binding.inputEmail.editText?.doAfterTextChanged {
             viewModel.inputEmailTextChanged(it.toString())
@@ -79,5 +78,8 @@ class LoginFragment : Fragment() {
         }
     }
 
-
+    private fun startValidation() {
+        viewModel.inputEmailTextChanged(binding.inputEmail.editText?.text.toString())
+        viewModel.inputPasswordTextChanged(binding.inputPassword.editText?.text.toString())
+    }
 }
